@@ -1,0 +1,54 @@
+---
+- name: Download Kibana.
+  get_url:
+    url: https://download.elasticsearch.org/kibana/kibana/kibana-3.0.1.tar.gz
+    dest: "{{ workspace }}/kibana-3.0.1.tar.gz"
+
+- name: Expand Kibana.
+  command: >
+    tar -C {{ workspace }} -xvzf {{ workspace }}/kibana-3.0.1.tar.gz
+    creates={{ kibana_root }}/config.js
+
+- name: Ensure www directory exists.
+  file:
+    path: /var/www
+    state: directory
+
+- name: Move Kibana into place.
+  command: >
+    mv {{ workspace }}/kibana-3.0.1 {{ kibana_root }}
+    creates={{ kibana_root }}/config.js
+
+- name: Copy Kibana configuration.
+  template:
+    src: config.js.j2
+    dest: "{{ kibana_root }}/config.js"
+    owner: root
+    group: root
+    mode: 644
+  notify: restart nginx
+
+- name: Copy Kibana nginx configuration.
+  template:
+    src: kibana.conf.j2
+    dest: /etc/nginx/conf.d/kibana.conf
+    owner: root
+    group: root
+    mode: 644
+  notify: restart nginx
+
+- name: Ensure htpasswd-related utilities are installed.
+  apt: "pkg={{ item }} state=present"
+  with_items:
+    - apache2-utils
+    - python-passlib
+
+- name: Create Kibana user account.
+  htpasswd:
+    path: /etc/nginx/conf.d/kibana.htpasswd
+    name: "{{ kibana_username }}"
+    password: "{{ kibana_password }}"
+    owner: root
+    group: www-data
+    mode: 640
+  notify: restart nginx
