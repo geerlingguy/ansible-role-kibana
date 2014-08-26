@@ -31,7 +31,7 @@
     dest: "{{ kibana_root }}/config.js"
     owner: root
     group: root
-    mode: 644
+    mode: 0644
   notify: restart nginx
 
 - name: Copy Kibana nginx configuration.
@@ -40,7 +40,7 @@
     dest: /etc/nginx/conf.d/kibana.conf
     owner: root
     group: root
-    mode: 644
+    mode: 0644
   notify: restart nginx
 
 - name: Create Kibana user account.
@@ -50,5 +50,5 @@
     password: "{{ kibana_password }}"
     owner: root
     group: "{{ nginx_user }}"
-    mode: 640
+    mode: 0640
   notify: restart nginx
