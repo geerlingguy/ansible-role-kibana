@@ -1,0 +1,7 @@
+---
+- name: Ensure htpasswd-related utilities are installed (RedHat).
+  yum: "pkg={{ item }} state=present enablerepo=epel"
+  with_items:
+    - httpd-tools
+    - python-passlib
+  when: ansible_os_family == 'RedHat'

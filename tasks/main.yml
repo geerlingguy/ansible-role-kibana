@@ -1,4 +1,10 @@
 ---
+- include: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
 - name: Download Kibana.
   get_url:
     url: https://download.elasticsearch.org/kibana/kibana/kibana-3.0.1.tar.gz
@@ -37,18 +43,12 @@
     mode: 644
   notify: restart nginx
 
-- name: Ensure htpasswd-related utilities are installed.
-  apt: "pkg={{ item }} state=present"
-  with_items:
-    - apache2-utils
-    - python-passlib
-
 - name: Create Kibana user account.
   htpasswd:
     path: /etc/nginx/conf.d/kibana.htpasswd
     name: "{{ kibana_username }}"
     password: "{{ kibana_password }}"
     owner: root
-    group: www-data
+    group: "{{ nginx_user }}"
     mode: 640
   notify: restart nginx

@@ -1,0 +1,7 @@
+---
+- name: Ensure htpasswd-related utilities are installed (Debian).
+  apt: "pkg={{ item }} state=present"
+  with_items:
+    - apache2-utils
+    - python-passlib
+  when: ansible_os_family == 'Debian'

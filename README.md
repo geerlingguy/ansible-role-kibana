@@ -8,7 +8,8 @@ An Ansible Role that installs Kibana on Debian/Ubuntu.
 
 ## Requirements
 
-This role was made to work with Nginx; other HTTP servers are not supported at this time.
+  - This role was made to work with Nginx; other HTTP servers are not supported at this time.
+  - On RedHat-based distributions, the `python-passlib` library is required, which is available through the EPEL repository. You can enable EPEL by adding the `geerlingguy.repo-epel` role to your playbook.
 
 ## Role Variables
 
@@ -38,6 +39,7 @@ Kibana basic HTTP authentication username and password. Please override these wi
 ## Dependencies
 
   - geerlingguy.nginx
+  - geerlingguy.repo-epel (RedHat/CentOS only)
 
 ## Example Playbook
 
