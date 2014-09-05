@@ -34,6 +34,10 @@ The port where Kibana will connect to Elasticsearch.
 
 Kibana basic HTTP authentication username and password. Please override these with secure credentials!
 
+    kibana_password_protect_all: false
+
+If set to `false` (default), only Kibana configuration resulting in persistent changes (saving or loading dashboards, for example) will be password protected. If set to `true`, *all* of Kibana will require password protection via Nginx HTTP basic authentication.
+
 ## Dependencies
 
   - geerlingguy.nginx

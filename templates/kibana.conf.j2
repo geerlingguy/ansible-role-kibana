@@ -24,22 +24,42 @@ server {
   location ~ ^/_aliases$ {
     proxy_pass http://127.0.0.1:9200;
     proxy_read_timeout 90;
+    {% if kibana_password_protect_all %}
+    auth_basic "Restricted";
+    auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
+    {% endif %}
   }
   location ~ ^/.*/_aliases$ {
     proxy_pass http://127.0.0.1:9200;
     proxy_read_timeout 90;
+    {% if kibana_password_protect_all %}
+    auth_basic "Restricted";
+    auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
+    {% endif %}
   }
   location ~ ^/_nodes$ {
     proxy_pass http://127.0.0.1:9200;
     proxy_read_timeout 90;
+    {% if kibana_password_protect_all %}
+    auth_basic "Restricted";
+    auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
+    {% endif %}
   }
   location ~ ^/.*/_search$ {
     proxy_pass http://127.0.0.1:9200;
     proxy_read_timeout 90;
+    {% if kibana_password_protect_all %}
+    auth_basic "Restricted";
+    auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
+    {% endif %}
   }
   location ~ ^/.*/_mapping {
     proxy_pass http://127.0.0.1:9200;
     proxy_read_timeout 90;
+    {% if kibana_password_protect_all %}
+    auth_basic "Restricted";
+    auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
+    {% endif %}
   }
 
   # Password protected end points
