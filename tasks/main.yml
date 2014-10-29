@@ -49,6 +49,6 @@
     name: "{{ kibana_username }}"
     password: "{{ kibana_password }}"
     owner: root
-    group: "{{ nginx_user }}"
+    group: root
     mode: 0640
   notify: restart nginx
