@@ -7,12 +7,12 @@
 
 - name: Download Kibana.
   get_url:
-    url: https://download.elasticsearch.org/kibana/kibana/kibana-3.0.1.tar.gz
-    dest: "{{ workspace }}/kibana-3.0.1.tar.gz"
+    url: "https://download.elasticsearch.org/kibana/kibana/kibana-{{ kibana_version }}.tar.gz"
+    dest: "{{ workspace }}/kibana-{{ kibana_version }}.tar.gz"
 
 - name: Expand Kibana.
   command: >
-    tar -C {{ workspace }} -xvzf {{ workspace }}/kibana-3.0.1.tar.gz
+    tar -C {{ workspace }} -xvzf {{ workspace }}/kibana-{{ kibana_version }}.tar.gz
     creates={{ kibana_root }}/config.js
 
 - name: Ensure www directory exists.
@@ -22,7 +22,7 @@
 
 - name: Move Kibana into place.
   command: >
-    mv {{ workspace }}/kibana-3.0.1 {{ kibana_root }}
+    mv {{ workspace }}/kibana-{{ kibana_version }} {{ kibana_root }}
     creates={{ kibana_root }}/config.js
 
 - name: Copy Kibana configuration.
