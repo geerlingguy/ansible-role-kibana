@@ -1,0 +1,30 @@
+
+- name: Copy Kibana configuration.
+  template:
+    src: config.js.j2
+    dest: "{{ kibana_root }}/config.js"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart nginx
+  when: nginx_create_vhosts
+
+- name: Copy Kibana nginx configuration.
+  template:
+    src: nginx-kibana.conf.j2
+    dest: {{ nginx_conf_path }}/conf.d/kibana.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart nginx
+  when: nginx_create_vhosts
+
+- name: Create Kibana user account.
+  htpasswd:
+    path: {{ nginx_conf_path }}/conf.d/kibana.htpasswd
+    name: "{{ kibana_username }}"
+    password: "{{ kibana_password }}"
+    owner: root
+    group: root
+    mode: 0640
+  notify: restart nginx

@@ -25,30 +25,9 @@
     mv {{ workspace }}/kibana-3.0.1 {{ kibana_root }}
     creates={{ kibana_root }}/config.js
 
-- name: Copy Kibana configuration.
-  template:
-    src: config.js.j2
-    dest: "{{ kibana_root }}/config.js"
-    owner: root
-    group: root
-    mode: 0644
-  notify: restart nginx
+- include: setup-nginx.yml
+  when: kibana_nginx_enabled
 
-- name: Copy Kibana nginx configuration.
-  template:
-    src: kibana.conf.j2
-    dest: /etc/nginx/conf.d/kibana.conf
-    owner: root
-    group: root
-    mode: 0644
-  notify: restart nginx
+- include: setup-apache.yml
+  when: kibana_apache_enabled
 
-- name: Create Kibana user account.
-  htpasswd:
-    path: /etc/nginx/conf.d/kibana.htpasswd
-    name: "{{ kibana_username }}"
-    password: "{{ kibana_password }}"
-    owner: root
-    group: root
-    mode: 0640
-  notify: restart nginx

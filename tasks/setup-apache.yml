@@ -1,0 +1,51 @@
+
+- name: Copy Kibana configuration.
+  template:
+    src: config.js.j2
+    dest: "{{ kibana_root }}/config.js"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart apache
+
+- name: Copy Kibana apache configuration.
+  template:
+    src: apache-kibana.conf.j2
+    dest: {{ apache_conf_path }}/sites-available/kibana.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart apache
+
+- name: Enable the kibana site
+  action: command a2ensite kibana
+  sudo: yes
+  ignore_errors: yes
+  notify: restart apache
+  when: apache_create_vhosts
+
+- name: Copy Kibana elasticsearch configuration.
+  template:
+    src: apache-elasticsearch.conf.j2
+    dest: {{ apache_conf_path }}/sites-available/elasticsearch.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart apache
+
+- name: Enable the elasticsearch site
+  action: command a2ensite elasticsearch
+  sudo: yes
+  ignore_errors: yes
+  notify: restart apache
+  when: apache_create_vhosts
+
+#- name: Create Kibana user account.
+#  htpasswd:
+#    path: /etc/nginx/conf.d/kibana.htpasswd
+#    name: "{{ kibana_username }}"
+#    password: "{{ kibana_password }}"
+#    owner: root
+#    group: root
+#    mode: 0640
+#  notify: restart apache
