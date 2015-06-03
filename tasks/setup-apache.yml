@@ -11,7 +11,7 @@
 - name: Copy Kibana apache configuration.
   template:
     src: apache-kibana.conf.j2
-    dest: {{ apache_conf_path }}/sites-available/kibana.conf
+    dest: "{{ apache_conf_path }}/sites-available/kibana.conf"
     owner: root
     group: root
     mode: 0644
@@ -27,7 +27,7 @@
 - name: Copy Kibana elasticsearch configuration.
   template:
     src: apache-elasticsearch.conf.j2
-    dest: {{ apache_conf_path }}/sites-available/elasticsearch.conf
+    dest: "{{ apache_conf_path }}/sites-available/elasticsearch.conf"
     owner: root
     group: root
     mode: 0644
