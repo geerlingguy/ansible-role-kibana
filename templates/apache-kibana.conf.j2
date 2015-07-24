@@ -1,0 +1,51 @@
+{# Set up VirtualHosts - servername and documentroot are required. #}
+{% for vhost in apache_vhosts_kibana %}
+<VirtualHost *:{{ vhost.port }}>
+  ServerName {{ vhost.servername }}
+{% if vhost.serveradmin is defined %}
+  ServerAdmin {{ vhost.serveradmin }}
+{% endif %}
+
+  alias /kibana {{ vhost.documentroot }}
+
+  DocumentRoot {{ vhost.documentroot }}
+  <Directory {{ vhost.documentroot }}>
+    Allow from all
+    Options -Multiviews
+  </Directory>
+
+{% if vhost.extra_parameters is defined %}
+  {{ vhost.extra_parameters }}
+{% endif %}
+
+  LogLevel debug
+  ErrorLog {{ apache_log_path }}/kibana_error.log
+  CustomLog {{ apache_log_path }}/kibana_access.log combined
+
+  # Set global proxy timeouts
+  <Proxy http://{{ kibana_server_elasticsearch_host }}:{{ kibana_server_elasticsearch_port }}>
+    ProxySet connectiontimeout=5 timeout=90
+  </Proxy>
+
+  # Proxy for _aliases and .*/_search
+  <LocationMatch "^/(_nodes|_aliases|.*/_aliases|_search|.*/_search|_mapping|.*/_mapping)$">
+    ProxyPassMatch http://{{ kibana_server_elasticsearch_host }}:{{ kibana_server_elasticsearch_port }}/$1
+    ProxyPassReverse http://{{ kibana_server_elasticsearch_host }}:{{ kibana_server_elasticsearch_port }}/$1
+  </LocationMatch>
+
+  # Proxy for kibana-int/{dashboard,temp} stuff (if you don't want auth on /, then you will want these to be protected)
+  <LocationMatch "^/(kibana-int/dashboard/|kibana-int/temp)(.*)$">
+    ProxyPassMatch http://{{ kibana_server_elasticsearch_host }}:{{ kibana_server_elasticsearch_port }}/$1$2
+    ProxyPassReverse http://{{ kibana_server_elasticsearch_host }}:{{ kibana_server_elasticsearch_port }}/$1$2
+  </LocationMatch>
+
+#  <Location />
+#    AuthType Basic
+#    AuthBasicProvider file
+#    AuthName "Restricted"
+#    AuthUserFile /etc/{{ apache_directory }}/conf.d/kibana-htpasswd
+#    Require valid-user
+#  </Location>
+</VirtualHost>
+
+{% endfor %}

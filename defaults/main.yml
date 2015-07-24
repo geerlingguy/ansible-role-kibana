@@ -3,9 +3,36 @@ workspace: /root
 
 kibana_root: /var/www/kibana3
 kibana_server_name: logs.example.com
+kibana_port: 80
 kibana_elasticsearch_port: 80
+kibana_server_elasticsearch_host: 127.0.0.1
+kibana_server_elasticsearch_port: 9200
+kibana_elasticsearch_url: ""
+#for apache use
+#kibana_elasticsearch_url: "/elasticsearch"
 
 kibana_username: kibana
 kibana_password: password
 
 kibana_password_protect_all: false
+kibana_nginx_enabled: yes
+kibana_apache_enabled: false
+
+nginx_create_vhosts: yes
+apache_create_vhosts: yes
+
+apache_directory : "apache2"
+apache_conf_path: "/etc/{{ apache_directory }}"
+apache_log_path: "${APACHE_LOG_DIR}"
+
+nginx_directory : "nginx"
+# nginx_conf_path come from geerlingguy.nginx role
+nginx_conf_path: /etc/{{ nginx_directory }}/conf.d
+
+apache_vhosts_kibana:
+  # Additional properties: 'serveradmin, extra_parameters'.
+  - {servername: "localhost", port: "{{ kibana_port }}", documentroot: "{{ kibana_root }}"}
+
+apache_vhosts_elasticsearch:
+  # Additional properties: 'serveradmin, extra_parameters'.
+  - {servername: "localhost", port: "{{ kibana_elasticsearch_port }}", documentroot: "{{ kibana_root }}"}

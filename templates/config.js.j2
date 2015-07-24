@@ -6,7 +6,7 @@
  */
 define(['settings'],
 function (Settings) {
-  
+
 
   /** @scratch /configuration/config.js/2
    *
@@ -29,7 +29,7 @@ function (Settings) {
      *  +elasticsearch: {server: "http://localhost:9200", withCredentials: true}+
      *
      */
-    elasticsearch: "http://"+window.location.hostname+":{{ kibana_elasticsearch_port }}",
+    elasticsearch: "http://"+window.location.hostname+":{{ kibana_elasticsearch_port }}{{ kibana_elasticsearch_url }}",
 
     /** @scratch /configuration/config.js/5
      *

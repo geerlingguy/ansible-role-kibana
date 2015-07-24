@@ -1,0 +1,28 @@
+{# Set up VirtualHosts - servername and documentroot are required. #}
+{% for vhost in apache_vhosts_elasticsearch %}
+<VirtualHost *:{{ vhost.port }}>
+  ServerName {{ vhost.servername }}
+{% if vhost.serveradmin is defined %}
+  ServerAdmin {{ vhost.serveradmin }}
+{% endif %}
+
+  ProxyPass /elasticsearch http://{{ kibana_server_elasticsearch_host }}:{{ kibana_server_elasticsearch_port }}
+  ProxyPassReverse /elasticsearch http://{{ kibana_server_elasticsearch_host }}:{{ kibana_server_elasticsearch_port }}
+  alias /kibana {{ vhost.documentroot }}
+
+  <Location /elasticsearch>
+      Order allow,deny
+      Allow from all
+  </Location>
+
+{% if vhost.extra_parameters is defined %}
+  {{ vhost.extra_parameters }}
+{% endif %}
+
+  LogLevel debug
+  ErrorLog {{ apache_log_path }}/elasticsearch_error.log
+  CustomLog {{ apache_log_path }}/elasticsearch_access.log combined
+
+</VirtualHost>
+
+{% endfor %}
