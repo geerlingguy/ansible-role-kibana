@@ -26,7 +26,7 @@ server {
     proxy_read_timeout 90;
     {% if kibana_password_protect_all %}
     auth_basic "Restricted";
-    auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
+    auth_basic_user_file {{ nginx_conf_path }}/kibana.htpasswd;
     {% endif %}
   }
   location ~ ^/.*/_aliases$ {
@@ -34,7 +34,7 @@ server {
     proxy_read_timeout 90;
     {% if kibana_password_protect_all %}
     auth_basic "Restricted";
-    auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
+    auth_basic_user_file {{ nginx_conf_path }}/kibana.htpasswd;
     {% endif %}
   }
   location ~ ^/_nodes$ {
@@ -42,7 +42,7 @@ server {
     proxy_read_timeout 90;
     {% if kibana_password_protect_all %}
     auth_basic "Restricted";
-    auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
+    auth_basic_user_file {{ nginx_conf_path }}/kibana.htpasswd;
     {% endif %}
   }
   location ~ ^/.*/_search$ {
@@ -50,7 +50,7 @@ server {
     proxy_read_timeout 90;
     {% if kibana_password_protect_all %}
     auth_basic "Restricted";
-    auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
+    auth_basic_user_file {{ nginx_conf_path }}/kibana.htpasswd;
     {% endif %}
   }
   location ~ ^/.*/_mapping {
@@ -58,7 +58,7 @@ server {
     proxy_read_timeout 90;
     {% if kibana_password_protect_all %}
     auth_basic "Restricted";
-    auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
+    auth_basic_user_file {{ nginx_conf_path }}/kibana.htpasswd;
     {% endif %}
   }
 
@@ -69,7 +69,7 @@ server {
     limit_except GET {
       proxy_pass http://{{ kibana_server_elasticsearch_host }}:{{ kibana_server_elasticsearch_port }};
       auth_basic "Restricted";
-      auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
+      auth_basic_user_file {{ nginx_conf_path }}/kibana.htpasswd;
     }
   }
   location ~ ^/kibana-int/temp.*$ {
@@ -78,7 +78,7 @@ server {
     limit_except GET {
       proxy_pass http://{{ kibana_server_elasticsearch_host }}:{{ kibana_server_elasticsearch_port }};
       auth_basic "Restricted";
-      auth_basic_user_file /etc/nginx/conf.d/kibana.htpasswd;
+      auth_basic_user_file {{ nginx_conf_path }}/kibana.htpasswd;
     }
   }
 }

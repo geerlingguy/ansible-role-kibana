@@ -26,7 +26,8 @@ apache_conf_path: "/etc/{{ apache_directory }}"
 apache_log_path: "${APACHE_LOG_DIR}"
 
 nginx_directory : "nginx"
-nginx_conf_path: "/etc/{{ nginx_directory }}"
+# nginx_conf_path come from geerlingguy.nginx role
+nginx_conf_path: /etc/{{ nginx_directory }}/conf.d
 
 apache_vhosts_kibana:
   # Additional properties: 'serveradmin, extra_parameters'.
