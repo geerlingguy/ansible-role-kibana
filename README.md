@@ -21,6 +21,10 @@ A workspace where Kibana's download will be stored while configuring Kibana.
 
 The location of Kibana's base install.
 
+    kibana_version: 3.1.2
+
+The version of kibana.
+
     kibana_server_name: logs.example.com
 
 The FQDN or IP address of the Kibana server.

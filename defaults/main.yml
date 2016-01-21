@@ -4,6 +4,7 @@ workspace: /root
 kibana_root: /var/www/kibana3
 kibana_server_name: logs.example.com
 kibana_elasticsearch_port: 80
+kibana_version: "3.1.2"
 
 kibana_username: kibana
 kibana_password: password
