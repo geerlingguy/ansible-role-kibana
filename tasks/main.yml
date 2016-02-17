@@ -11,9 +11,11 @@
     dest: "{{ workspace }}/kibana-{{ kibana_version }}.tar.gz"
 
 - name: Expand Kibana.
-  command: >
-    tar -C {{ workspace }} -xvzf {{ workspace }}/kibana-{{ kibana_version }}.tar.gz
-    creates={{ kibana_root }}/config.js
+  unarchive:
+    src: "{{ workspace }}/kibana-{{ kibana_version }}.tar.gz"
+    dest: "{{ workspace }}"
+    copy: no
+    creates: "{{ kibana_root }}/config.js"
 
 - name: Ensure www directory exists.
   file:
