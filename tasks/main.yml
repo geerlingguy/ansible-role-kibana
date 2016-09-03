@@ -5,52 +5,20 @@
 - include: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- name: Download Kibana.
-  get_url:
-    url: "https://download.elasticsearch.org/kibana/kibana/kibana-{{ kibana_version }}.tar.gz"
-    dest: "{{ workspace }}/kibana-{{ kibana_version }}.tar.gz"
+- name: Install Kibana.
+  package: name=kibana state=present
 
-- name: Expand Kibana.
-  unarchive:
-    src: "{{ workspace }}/kibana-{{ kibana_version }}.tar.gz"
-    dest: "{{ workspace }}"
-    copy: no
-    creates: "{{ kibana_root }}/config.js"
-
-- name: Ensure www directory exists.
-  file:
-    path: /var/www
-    state: directory
-
-- name: Move Kibana into place.
-  command: >
-    mv {{ workspace }}/kibana-{{ kibana_version }} {{ kibana_root }}
-    creates={{ kibana_root }}/config.js
+- name: Ensure Kibana is started and enabled at boot.
+  service:
+    name: kibana
+    state: started
+    enabled: yes
 
 - name: Copy Kibana configuration.
   template:
-    src: config.js.j2
-    dest: "{{ kibana_root }}/config.js"
+    src: kibana.yml.j2
+    dest: "/opt/kibana/config/kibana.yml"
     owner: root
     group: root
     mode: 0644
-  notify: restart nginx
-
-- name: Copy Kibana nginx configuration.
-  template:
-    src: kibana.conf.j2
-    dest: /etc/nginx/conf.d/kibana.conf
-    owner: root
-    group: root
-    mode: 0644
-  notify: restart nginx
-
-- name: Create Kibana user account.
-  htpasswd:
-    path: /etc/nginx/conf.d/kibana.htpasswd
-    name: "{{ kibana_username }}"
-    password: "{{ kibana_password }}"
-    owner: root
-    group: "{{ nginx_user }}"
-    mode: 0640
-  notify: restart nginx
+  notify: restart kibana

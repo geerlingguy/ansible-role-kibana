@@ -1,12 +1,7 @@
 ---
-workspace: /root
+kibana_version: "4.6"
 
-kibana_root: /var/www/kibana3
-kibana_server_name: logs.example.com
-kibana_elasticsearch_port: 80
-kibana_version: "3.1.3"
+kibana_server_port: 5601
+kibana_server_host: "0.0.0.0"
 
-kibana_username: kibana
-kibana_password: password
-
-kibana_password_protect_all: false
+kibana_elasticsearch_url: "http://localhost:9200"

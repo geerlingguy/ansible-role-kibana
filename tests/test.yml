@@ -1,9 +1,6 @@
 ---
 - hosts: all
 
-  vars:
-    nginx_user: root
-
   pre_tasks:
     - name: Update apt cache.
       apt: update_cache=yes
@@ -13,5 +10,4 @@
       package: name=curl state=present
 
   roles:
-    - geerlingguy.nginx
     - role_under_test

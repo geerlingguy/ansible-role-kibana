@@ -1,7 +1,11 @@
 ---
-- name: Ensure htpasswd-related utilities are installed (RedHat).
-  yum: "pkg={{ item }} state=present enablerepo=epel"
-  with_items:
-    - httpd-tools
-    - python-passlib
-  when: ansible_os_family == 'RedHat'
+- name: Add Elasticsearch GPG key.
+  rpm_key:
+    key: https://packages.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Add Kibana repository.
+  template:
+    src: kibana.repo.j2
+    dest: /etc/yum.repos.d/kibana.repo
+    mode: 0644
