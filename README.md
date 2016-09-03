@@ -6,53 +6,34 @@ An Ansible Role that installs Kibana on RedHat/CentOS or Debian/Ubuntu.
 
 ## Requirements
 
-  - This role was made to work with Nginx; other HTTP servers are not supported at this time.
-  - On RedHat-based distributions, the `python-passlib` library is required, which is available through the EPEL repository. You can enable EPEL by adding the `geerlingguy.repo-epel` role to your playbook.
+None.
 
 ## Role Variables
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    workspace: /root
+    kibana_version: "4.6"
 
-A workspace where Kibana's download will be stored while configuring Kibana.
+The version of kibana to install (major and minor only).
 
-    kibana_root: /var/www/kibana3
+    kibana_server_port: 5601
+    kibana_server_host: "0.0.0.0"
 
-The location of Kibana's base install.
+The FQDN or IP address and port Kibana should use.
 
-    kibana_version: 3.1.2
+    kibana_elasticsearch_url: "http://localhost:9200"
 
-The version of kibana to install.
-
-    kibana_server_name: logs.example.com
-
-The FQDN or IP address of the Kibana server.
-
-    kibana_elasticsearch_port: 80
-
-The port where Kibana will connect to Elasticsearch.
-
-    kibana_username: kibana
-    kibana_password: password
-
-Kibana basic HTTP authentication username and password. Please override these with secure credentials!
-
-    kibana_password_protect_all: false
-
-If set to `false` (default), only Kibana configuration resulting in persistent changes (saving or loading dashboards, for example) will be password protected. If set to `true`, *all* of Kibana will require password protection via Nginx HTTP basic authentication.
+The URL (including port) over which Kibana will connect to Elasticsearch.
 
 ## Dependencies
 
-  - geerlingguy.nginx
-  - geerlingguy.repo-epel (RedHat/CentOS only)
+None.
 
 ## Example Playbook
 
-    - hosts: search
+    - hosts: kibana
       roles:
-        - { role: geerlingguy.nginx }
-        - { role: geerlingguy.kibana }
+        - geerlingguy.kibana
 
 ## License
 
