@@ -1,8 +1,17 @@
 ---
-- hosts: localhost
-  remote_user: root
+- hosts: all
+
   vars:
     nginx_user: root
+
+  pre_tasks:
+    - name: Update apt cache.
+      apt: update_cache=yes
+      when: ansible_os_family == 'Debian'
+
+    - name: Install test dependencies.
+      package: name=curl state=present
+
   roles:
     - geerlingguy.nginx
-    - ansible-role-kibana
+    - role_under_test
