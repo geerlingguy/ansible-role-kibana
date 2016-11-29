@@ -5,3 +5,7 @@ kibana_server_port: 5601
 kibana_server_host: "0.0.0.0"
 
 kibana_elasticsearch_url: "http://localhost:9200"
+kibana_elasticsearch_requestTimeout: 30000
+#kibana_logging_dest: stdout
+kibana_logging_dest: /var/log/kibana/kibana.log
+

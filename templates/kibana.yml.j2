@@ -55,6 +55,7 @@ elasticsearch.url: {{ kibana_elasticsearch_url }}
 # Time in milliseconds to wait for responses from the back end or elasticsearch.
 # This must be > 0
 # elasticsearch.requestTimeout: 30000
+elasticsearch.requestTimeout: {{ kibana_elasticsearch_requestTimeout }}
 
 # Header names and values that are sent to Elasticsearch. Any custom headers cannot be overwritten
 # by client-side headers.
@@ -72,6 +73,7 @@ elasticsearch.url: {{ kibana_elasticsearch_url }}
 
 # If you would like to send the log output to a file you can set the path below.
 # logging.dest: stdout
+logging.dest: {{ kibana_logging_dest }}
 
 # Set this to true to suppress all logging output.
 # logging.silent: false

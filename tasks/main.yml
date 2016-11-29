@@ -22,3 +22,9 @@
     group: root
     mode: 0644
   notify: restart kibana
+
+- name: Ensure kibana log dir exists with right permissions
+  file: dest={{ kibana_logging_dest | dirname }} state=directory
+- name: Ensure kibana log dir has right permissions with acl
+  acl: name={{ kibana_logging_dest | dirname }} entity=kibana etype=user permissions="rwx" state=present
+
