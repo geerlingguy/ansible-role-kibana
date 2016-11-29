@@ -14,10 +14,16 @@
     state: started
     enabled: yes
 
+- set_fact:
+    kibana_etc: /opt/kibana/config
+  when: kibana_repo_version == '4.x'
+- set_fact:
+    kibana_etc: /etc/kibana
+  when: kibana_repo_version == '5.x'
 - name: Copy Kibana configuration.
   template:
     src: kibana.yml.j2
-    dest: "/opt/kibana/config/kibana.yml"
+    dest: "{{ kibana_etc }}/kibana.yml"
     owner: root
     group: root
     mode: 0644

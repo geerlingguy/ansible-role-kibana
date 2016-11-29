@@ -7,8 +7,16 @@
     url: https://packages.elastic.co/GPG-KEY-elasticsearch
     state: present
 
-- name: Add Kibana repository.
+- name: Add Kibana repository. - 4.x
   apt_repository:
-    repo: 'deb https://packages.elastic.co/kibana/{{ kibana_version }}/debian stable main'
+    repo: 'deb https://packages.elastic.co/kibana/4.6/debian stable main'
     state: present
     update_cache: yes
+  when: kibana_repo_version == '4.x'
+- name: Add Kibana repository. - 5.x
+  apt_repository:
+    repo: 'deb https://artifacts.elastic.co/packages/5.x/apt stable main'
+    state: present
+    update_cache: yes
+  when: kibana_repo_version == '5.x'
+
