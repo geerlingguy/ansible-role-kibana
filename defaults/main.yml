@@ -8,8 +8,6 @@ kibana_elasticsearch_url: "http://localhost:9200"
 
 kibana_server_maxPayloadBytes: 1048576
 
-kibana_elasticsearch_url: "http://localhost:9200"
-
 kibana_kibana_index: ".kibana"
  
 kibana_kibana_defaultAppId: "discover"
