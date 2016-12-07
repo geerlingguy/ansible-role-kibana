@@ -5,3 +5,23 @@ kibana_server_port: 5601
 kibana_server_host: "0.0.0.0"
 
 kibana_elasticsearch_url: "http://localhost:9200"
+
+kibana_server_maxPayloadBytes: 1048576
+
+kibana_elasticsearch_url: "http://localhost:9200"
+
+kibana_kibana_index: ".kibana"
+ 
+kibana_kibana_defaultAppId: "discover"
+
+kibana_elasticsearch_pingTimeout: 1500
+kibana_elasticsearch_requestTimeout: 30000
+kibana_elasticsearch_shardTimeout: 0
+kibana_elasticsearch_startupTimeout: 5000
+
+kibana_pid_file: /var/run/kibana.pid
+
+kibana_logging_dest: stdout
+kibana_logging_silent: false
+kibana_logging_quiet: false
+kibana_logging_verbose: false 

@@ -9,7 +9,7 @@ server.host: {{ kibana_server_host }}
 # server.basePath: ""
 
 # The maximum payload size in bytes on incoming server requests.
-# server.maxPayloadBytes: 1048576
+server.maxPayloadBytes: {{ kibana_server_maxPayloadBytes }}
 
 # The Elasticsearch instance to use for all your queries.
 elasticsearch.url: {{ kibana_elasticsearch_url }}
@@ -20,10 +20,10 @@ elasticsearch.url: {{ kibana_elasticsearch_url }}
 
 # Kibana uses an index in Elasticsearch to store saved searches, visualizations
 # and dashboards. It will create a new index if it doesn't already exist.
-# kibana.index: ".kibana"
+kibana.index: {{ kibana_kibana_index }}
 
 # The default application to load.
-# kibana.defaultAppId: "discover"
+kibana.defaultAppId: {{ kibana_kibana_defaultAppId }}
 
 # If your Elasticsearch is protected with basic auth, these are the user credentials
 # used by the Kibana server to perform maintenance on the kibana_index at startup. Your Kibana
@@ -50,11 +50,11 @@ elasticsearch.url: {{ kibana_elasticsearch_url }}
 
 # Time in milliseconds to wait for elasticsearch to respond to pings, defaults to
 # request_timeout setting
-# elasticsearch.pingTimeout: 1500
+elasticsearch.pingTimeout: {{ kibana_elasticsearch_pingTimeout }}
 
 # Time in milliseconds to wait for responses from the back end or elasticsearch.
 # This must be > 0
-# elasticsearch.requestTimeout: 30000
+elasticsearch.requestTimeout: {{ kibana_elasticsearch_requestTimeout }}
 
 # Header names and values that are sent to Elasticsearch. Any custom headers cannot be overwritten
 # by client-side headers.
@@ -62,22 +62,22 @@ elasticsearch.url: {{ kibana_elasticsearch_url }}
 
 # Time in milliseconds for Elasticsearch to wait for responses from shards.
 # Set to 0 to disable.
-# elasticsearch.shardTimeout: 0
+elasticsearch.shardTimeout: {{ kibana_elasticsearch_shardTimeout }}
 
 # Time in milliseconds to wait for Elasticsearch at Kibana startup before retrying
-# elasticsearch.startupTimeout: 5000
+elasticsearch.startupTimeout: {{ kibana_elasticsearch_startupTimeout }}
 
 # Set the path to where you would like the process id file to be created.
-# pid.file: /var/run/kibana.pid
+pid.file: {{ kibana_pid_file }}
 
 # If you would like to send the log output to a file you can set the path below.
-# logging.dest: stdout
+logging.dest: {{ kibana_logging_dest }}
 
 # Set this to true to suppress all logging output.
-# logging.silent: false
+logging.silent: {{ kibana_logging_silent }}
 
 # Set this to true to suppress all logging output except for error messages.
-# logging.quiet: false
+logging.quiet: {{ kibana_logging_quiet }}
 
 # Set this to true to log all events, including system usage information and all requests.
-# logging.verbose: false
+logging.verbose: {{ kibana_logging_verbose }}
