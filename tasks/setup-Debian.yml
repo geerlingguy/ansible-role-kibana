@@ -12,3 +12,9 @@
     repo: 'deb https://packages.elastic.co/kibana/{{ kibana_version }}/debian stable main'
     state: present
     update_cache: yes
+
+- name: Create kibana config directory
+  sudo: true
+  file:
+    path: /opt/kibana/config
+    state: directory
