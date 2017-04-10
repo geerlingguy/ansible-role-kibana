@@ -33,8 +33,14 @@ elasticsearch.url: {{ kibana_elasticsearch_url }}
 # elasticsearch.password: "pass"
 
 # SSL for outgoing requests from the Kibana Server to the browser (PEM formatted)
+{% if (kibana_server_ssl_key is defined) and (kibana_server_ssl_certificate is defined) %}
+server.ssl.enabled: true
+server.ssl.key: /etc/kibana/kibana_server_ssl.key
+server.ssl.certificate: /etc/kibana/kibana_server_ssl.crt
+{% else %}
 # server.ssl.cert: /path/to/your/server.crt
 # server.ssl.key: /path/to/your/server.key
+{% endif %}
 
 # Optional setting to validate that your Elasticsearch backend uses the same key files (PEM formatted)
 # elasticsearch.ssl.cert: /path/to/your/client.crt

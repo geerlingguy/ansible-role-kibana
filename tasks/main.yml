@@ -14,6 +14,28 @@
     state: started
     enabled: yes
 
+- name: Copy Kibana SSL key
+  become: yes
+  copy:
+    content: "{{ kibana_server_ssl_key }}"
+    dest: "/etc/kibana/kibana_server_ssl.key"
+    owner: kibana
+    group: kibana
+    mode: 0600
+  notify: restart kibana
+  when: kibana_server_ssl_key is defined
+
+- name: Copy Kibana SSL certificate
+  become: yes
+  copy:
+    content: "{{ kibana_server_ssl_certificate }}"
+    dest: "/etc/kibana/kibana_server_ssl.crt"
+    owner: kibana
+    group: kibana
+    mode: 0644
+  notify: restart kibana
+  when: kibana_server_ssl_certificate is defined
+
 - name: Copy Kibana configuration.
   template:
     src: kibana.yml.j2
