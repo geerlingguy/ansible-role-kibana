@@ -28,17 +28,19 @@
   notify: restart kibana
 
 - name: Ensure kibana log dir exists with right permissions
-  file: dest={{ kibana_logging_dest | dirname }} state=directory
+  file:
+    dest: "{{ kibana_logging_dest | dirname }}"
+    state: directory
+    owner: kibana
 
-- name: Ensure acl package is present
-  package: name=acl state=present
-
-## FIXME! not idempotent on older distributions (centos6, trusty, precise)
-- name: Ensure kibana log dir has right permissions with acl
-  acl:
-    name: "{{ kibana_logging_dest | dirname }}"
-    entity: kibana
-    etype: user
-    permissions: "rwx"
-    state: present
-
+#- name: Ensure acl package is present
+#  package: name=acl state=present
+#
+### FIXME! not idempotent on older distributions (centos6, trusty, precise)
+#- name: Ensure kibana log dir has right permissions with acl
+#  acl:
+#    name: "{{ kibana_logging_dest | dirname }}"
+#    entity: kibana
+#    etype: user
+#    permissions: "rwx"
+#    state: present
