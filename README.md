@@ -12,7 +12,8 @@ None.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    kibana_version: "4.6"
+    kibana_repo_version: 4.x
+    #kibana_repo_version: 5.x
 
 The version of kibana to install (major and minor only).
 

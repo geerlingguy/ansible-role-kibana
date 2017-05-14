@@ -1,14 +1,26 @@
 ---
 - name: Ensure dependency is installed (Ubuntu).
-  apt: name=apt-transport-https state=present
+  apt: name={{ item }} state=present
+  with_items:
+    - apt-transport-https
+    - acl
 
 - name: Add Elasticsearch apt key.
   apt_key:
     url: https://packages.elastic.co/GPG-KEY-elasticsearch
     state: present
 
-- name: Add Kibana repository.
+- name: Add Kibana repository. - 4.x
   apt_repository:
-    repo: 'deb https://packages.elastic.co/kibana/{{ kibana_version }}/debian stable main'
+    repo: 'deb https://packages.elastic.co/kibana/4.6/debian stable main'
     state: present
     update_cache: yes
+  when: kibana_repo_version == '4.x'
+
+- name: Add Kibana repository. - 5.x
+  apt_repository:
+    repo: 'deb https://artifacts.elastic.co/packages/5.x/apt stable main'
+    state: present
+    update_cache: yes
+  when: kibana_repo_version == '5.x'
+
