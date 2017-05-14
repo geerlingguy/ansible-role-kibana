@@ -1,4 +1,8 @@
 ---
+
+- name: Include version-specific variables
+  include_vars: "kibana-{{ kibana_repo_version }}.yml"
+
 - include: setup-RedHat.yml
   when: ansible_os_family == 'RedHat'
 
@@ -14,15 +18,9 @@
     state: started
     enabled: yes
 
-- set_fact:
-    kibana_etc: /opt/kibana/config
-  when: kibana_repo_version == '4.x'
-- set_fact:
-    kibana_etc: /etc/kibana
-  when: kibana_repo_version == '5.x'
 - name: Copy Kibana configuration.
   template:
-    src: kibana.yml.j2
+    src: "kibana.yml.j2"
     dest: "{{ kibana_etc }}/kibana.yml"
     owner: root
     group: root
@@ -31,6 +29,7 @@
 
 - name: Ensure kibana log dir exists with right permissions
   file: dest={{ kibana_logging_dest | dirname }} state=directory
+
 - name: Ensure kibana log dir has right permissions with acl
   acl: name={{ kibana_logging_dest | dirname }} entity=kibana etype=user permissions="rwx" state=present
 

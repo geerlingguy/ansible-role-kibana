@@ -16,6 +16,7 @@
     state: present
     update_cache: yes
   when: kibana_repo_version == '4.x'
+
 - name: Add Kibana repository. - 5.x
   apt_repository:
     repo: 'deb https://artifacts.elastic.co/packages/5.x/apt stable main'

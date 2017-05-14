@@ -4,19 +4,44 @@ services: docker
 env:
   - distro: centos7
     init: /usr/lib/systemd/systemd
-    run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
+    run_opts: "'--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro'"
+    ansible_extra_vars: ""
   - distro: centos6
     init: /sbin/init
     run_opts: ""
+    ansible_extra_vars: ""
   - distro: ubuntu1604
     init: /lib/systemd/systemd
-    run_opts: "--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro"
+    run_opts: "'--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro'"
+    ansible_extra_vars: ""
   - distro: ubuntu1404
     init: /sbin/init
     run_opts: ""
+    ansible_extra_vars: ""
   - distro: ubuntu1204
     init: /sbin/init
     run_opts: ""
+    ansible_extra_vars: ""
+  - distro: centos7
+    init: /usr/lib/systemd/systemd
+    run_opts: "'--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro'"
+    ansible_extra_vars: "-e kibana_repo_version=5.x"
+  - distro: centos6
+    init: /sbin/init
+    run_opts: ""
+    ansible_extra_vars: "-e kibana_repo_version=5.x"
+  - distro: ubuntu1604
+    init: /lib/systemd/systemd
+    run_opts: "'--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro'"
+    ansible_extra_vars: "-e kibana_repo_version=5.x"
+  - distro: ubuntu1404
+    init: /sbin/init
+    run_opts: ""
+    ansible_extra_vars: "-e kibana_repo_version=5.x"
+  - distro: ubuntu1204
+    init: /sbin/init
+    run_opts: ""
+    ansible_extra_vars: "-e kibana_repo_version=5.x"
 
 before_install:
   # Pull container.
@@ -31,11 +56,11 @@ script:
   - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml --syntax-check'
 
   # Test role.
-  - 'docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml'
+  - 'docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml ${ansible_extra_vars}'
 
   # Test role idempotence.
   - idempotence=$(mktemp)
-  - docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml | tee -a ${idempotence}
+  - docker exec "$(cat ${container_id})" ansible-playbook /etc/ansible/roles/role_under_test/tests/test.yml ${ansible_extra_vars} | tee -a ${idempotence}
   - >
     tail ${idempotence}
     | grep -q 'changed=0.*failed=0'
