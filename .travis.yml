@@ -25,23 +25,23 @@ env:
   - distro: centos7
     init: /usr/lib/systemd/systemd
     run_opts: "'--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro'"
-    ansible_extra_vars: "-e kibana_repo_version=5.x"
+    ansible_extra_vars: "'-e kibana_repo_version=5.x'"
   - distro: centos6
     init: /sbin/init
     run_opts: ""
-    ansible_extra_vars: "-e kibana_repo_version=5.x"
+    ansible_extra_vars: "'-e kibana_repo_version=5.x'"
   - distro: ubuntu1604
     init: /lib/systemd/systemd
     run_opts: "'--privileged --volume=/sys/fs/cgroup:/sys/fs/cgroup:ro'"
-    ansible_extra_vars: "-e kibana_repo_version=5.x"
+    ansible_extra_vars: "'-e kibana_repo_version=5.x'"
   - distro: ubuntu1404
     init: /sbin/init
     run_opts: ""
-    ansible_extra_vars: "-e kibana_repo_version=5.x"
+    ansible_extra_vars: "'-e kibana_repo_version=5.x'"
   - distro: ubuntu1204
     init: /sbin/init
     run_opts: ""
-    ansible_extra_vars: "-e kibana_repo_version=5.x"
+    ansible_extra_vars: "'-e kibana_repo_version=5.x'"
 
 before_install:
   # Pull container.
@@ -65,7 +65,7 @@ script:
     tail ${idempotence}
     | grep -q 'changed=0.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
-    || (echo 'Idempotence test: fail' && exit 1)
+    || (echo 'Idempotence test: fail' && cat ${idempotence} && exit 1)
 
   # Test whether Kibana is running correctly.
   - 'docker exec --tty "$(cat ${container_id})" env TERM=xterm curl http://localhost:5601/'
