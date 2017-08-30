@@ -21,6 +21,11 @@ The version of kibana to install (major and minor only).
 
 The FQDN or IP address and port Kibana should use.
 
+    kibana_config_dir: "/etc/kibana"
+
+OPTINAL. The path where the config file should be copied to.
+If this is not set, role will try to guess and find it.
+
     kibana_elasticsearch_url: "http://localhost:9200"
 
 The URL (including port) over which Kibana will connect to Elasticsearch.

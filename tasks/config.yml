@@ -1,0 +1,27 @@
+---
+- name: Try to find config directory (/opt/kibana/config)
+  stat: path=/opt/kibana/config
+  register: stat_config_dir_opt
+  when: kibana_config_dir is undefined
+
+- name: Try to set installation directory variable to /opt/kibana/config
+  set_fact: kibana_config_dir="/opt/kibana/config"
+  when: kibana_config_dir is undefined and stat_config_dir_opt.stat.exists and stat_config_dir_opt.stat.isdir
+
+- name: Try to find installation directory (/etc/kibana)
+  stat: path=/etc/kibana
+  register: stat_config_dir_etc
+  when: kibana_config_dir is undefined
+
+- name: Try to set installation directory variable to /etc/kibana
+  set_fact: kibana_config_dir="/etc/kibana"
+  when: kibana_config_dir is undefined and stat_config_dir_etc.stat.exists and stat_config_dir_etc.stat.isdir
+
+- name: Copy Kibana configuration.
+  template:
+    src: kibana.yml.j2
+    dest: "{{ kibana_config_dir }}/kibana.yml"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart kibana
