@@ -12,10 +12,6 @@ None.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    kibana_version: "4.6"
-
-The version of kibana to install (major and minor only).
-
     kibana_server_port: 5601
     kibana_server_host: "0.0.0.0"
 
