@@ -14,10 +14,20 @@
     state: started
     enabled: yes
 
+- name: Set old Kibana config file helper var.
+  set_fact:
+    kibana_config_file: "/opt/kibana/config/kibana.yml"
+  when: kibana_version != "5"
+
+- name: Set new Kibana config file helper var.
+  set_fact:
+    kibana_config_file: "/etc/kibana/kibana.yml"
+  when: kibana_version == "5"
+
 - name: Copy Kibana configuration.
   template:
     src: kibana.yml.j2
-    dest: "/opt/kibana/config/kibana.yml"
+    dest: "{{ kibana_config_file }}"
     owner: root
     group: root
     mode: 0644

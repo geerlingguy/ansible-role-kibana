@@ -2,13 +2,25 @@
 - name: Ensure dependency is installed (Ubuntu).
   apt: name=apt-transport-https state=present
 
+- name: Set old Kibana helper vars.
+  set_fact:
+    kibana_apt_key: "https://packages.elastic.co/GPG-KEY-elasticsearch"
+    kibana_repo_deb: "https://packages.elastic.co/kibana/{{ kibana_version }}/debian"
+  when: kibana_version != "5"
+
+- name: Set new Kibana helper vars.
+  set_fact:
+    kibana_apt_key: "https://artifacts.elastic.co/GPG-KEY-elasticsearch"
+    kibana_repo_deb: "https://artifacts.elastic.co/packages/5.x/apt"
+  when: kibana_version == "5"
+
 - name: Add Elasticsearch apt key.
   apt_key:
-    url: https://packages.elastic.co/GPG-KEY-elasticsearch
+    url: "{{ kibana_apt_key }}"
     state: present
 
 - name: Add Kibana repository.
   apt_repository:
-    repo: 'deb https://packages.elastic.co/kibana/{{ kibana_version }}/debian stable main'
+    repo: 'deb {{ kibana_repo_deb }} stable main'
     state: present
     update_cache: yes
