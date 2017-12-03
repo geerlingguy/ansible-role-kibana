@@ -1,6 +1,6 @@
 # Ansible Role: Kibana
 
-An Ansible Role that installs Kibana on RedHat/CentOS or Debian/Ubuntu.
+An Ansible Role that installs Kibana on Ubuntu.
 
 ## Requirements
 
@@ -12,7 +12,6 @@ For variables please see the [kibana documentation](https://www.elastic.co/guide
 
 
 ## Dependencies
-
 None.
 
 ## Example Playbook
