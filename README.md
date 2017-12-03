@@ -1,7 +1,5 @@
 # Ansible Role: Kibana
 
-[![Build Status](https://travis-ci.org/geerlingguy/ansible-role-kibana.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-kibana)
-
 An Ansible Role that installs Kibana on RedHat/CentOS or Debian/Ubuntu.
 
 ## Requirements
@@ -10,20 +8,8 @@ None.
 
 ## Role Variables
 
-Available variables are listed below, along with default values (see `defaults/main.yml`):
+For variables please see the [kibana documentation](https://www.elastic.co/guide/en/kibana/current/settings.html) 
 
-    kibana_version: "4.6"
-
-The version of kibana to install (major and minor only).
-
-    kibana_server_port: 5601
-    kibana_server_host: "0.0.0.0"
-
-The FQDN or IP address and port Kibana should use.
-
-    kibana_elasticsearch_url: "http://localhost:9200"
-
-The URL (including port) over which Kibana will connect to Elasticsearch.
 
 ## Dependencies
 
@@ -33,12 +19,13 @@ None.
 
     - hosts: kibana
       roles:
-        - geerlingguy.kibana
+        - stuvusIT.kibana
 
 ## License
 
-MIT / BSD
+This work is licensed under a [Creative Commons Attribution-ShareAlike 4.0 International License](https://creativecommons.org/licenses/by-sa/4.0/).
+
 
 ## Author Information
 
-This role was created in 2014 by [Jeff Geerling](https://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/).
+- [Fritz Otlinghaus (Scriptkiddi)](https://github.com/scriptkiddi) _fritz.otlinghaus@stuvus.uni-stuttgart.de_
