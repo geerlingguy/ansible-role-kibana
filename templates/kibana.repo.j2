@@ -1,6 +1,8 @@
-[kibana-{{ kibana_version }}]
-name=Kibana repository for {{ kibana_version }}.x packages
-baseurl=https://packages.elastic.co/kibana/{{ kibana_version }}/centos
+[elasticsearch-{{ kibana_version }}.x]
+name=Elasticsearch repository for {{ kibana_version }}.x packages
+baseurl=https://artifacts.elastic.co/packages/{{ kibana_version }}.x/yum
 gpgcheck=1
-gpgkey=https://packages.elastic.co/GPG-KEY-elasticsearch
+gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
 enabled=1
+autorefresh=1
+type=rpm-md
