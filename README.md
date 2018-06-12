@@ -36,6 +36,10 @@ The template to use for the Kibana config file, and the path to which the config
 
 The FQDN or IP address and port Kibana should use.
 
+    kibana_server_basepath: ""
+
+The base path to mount Kibana (by default, it is mounted on url root path).
+
     kibana_elasticsearch_url: "http://localhost:9200"
 
 The URL (including port) over which Kibana will connect to Elasticsearch.
