@@ -12,7 +12,7 @@ None.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    kibana_version: "4.6"
+    kibana_version: "6.2.4"
 
 The version of kibana to install (major and minor only).
 
@@ -24,6 +24,7 @@ The FQDN or IP address and port Kibana should use.
     kibana_elasticsearch_url: "http://localhost:9200"
 
 The URL (including port) over which Kibana will connect to Elasticsearch.
+
 
 ## Dependencies
 
