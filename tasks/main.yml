@@ -1,11 +1,11 @@
 ---
-- include: setup-RedHat.yml
+- include_tasks: setup-RedHat.yml
   when: ansible_os_family == 'RedHat'
 
-- include: setup-Debian.yml
+- include_tasks: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- include: plugins.yml
+- include_tasks: plugins.yml
 
 - name: Ensure Kibana is started and enabled at boot.
   service:
