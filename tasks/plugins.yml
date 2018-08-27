@@ -11,5 +11,5 @@
   args:
     chdir: "/usr/share/kibana"
   with_items: "{{ kibana_plugins }}"
-  when: kibana_plugins != "" and kibana_plugins_list.stdout.find(item.plugin) != -1
+  when: kibana_plugins != "" and kibana_plugins_list.stdout.find(item.plugin) == -1
 ...
