@@ -1,3 +1,9 @@
+# Kibana configuration
+
+{% if kibana_config %}
+{{ kibana_config | to_nice_yaml }}
+{% endif %}
+
 # Kibana is served by a back end server. This controls which port to use.
 server.port: {{ kibana_server_port }}
 
