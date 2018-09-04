@@ -1,8 +1,15 @@
 ---
-- name: Add Elasticsearch GPG key.
+- name: Add Elasticsearch GPG key (< 5.x).
   rpm_key:
     key: https://packages.elastic.co/GPG-KEY-elasticsearch
     state: present
+  when: kibana_version is version_compare('5', '<')
+
+- name: Add Elasticsearch GPG key (>= 5.x).
+  rpm_key:
+    key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+  when: kibana_version is version_compare('5', '>=')
 
 - name: Add Kibana repository.
   template:

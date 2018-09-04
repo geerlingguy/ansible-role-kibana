@@ -1,6 +1,14 @@
 [kibana-{{ kibana_version }}]
 name=Kibana repository for {{ kibana_version }}.x packages
+{% if kibana_version | version_compare('5', '<')  %}
 baseurl=https://packages.elastic.co/kibana/{{ kibana_version }}/centos
+{% else %}
+baseurl=https://artifacts.elastic.co/packages/{{ kibana_version }}/centos
+{% endif %}
 gpgcheck=1
+{% if kibana_version | version_compare('5', '<')  %}
 gpgkey=https://packages.elastic.co/GPG-KEY-elasticsearch
+{% else %}
+gpgkey=https://artifacts.elastic.co/GPG-KEY-elasticsearch
+{% endif %}
 enabled=1
