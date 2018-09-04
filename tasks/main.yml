@@ -22,3 +22,14 @@
     group: root
     mode: 0644
   notify: restart kibana
+  when: kibana_version is version_compare('5', '<')
+
+- name: Copy Kibana configuration.
+  template:
+    src: kibana.yml.j2
+    dest: "/etc/kibana/kibana.yml"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart kibana
+  when: kibana_version is version_compare('5', '>=')

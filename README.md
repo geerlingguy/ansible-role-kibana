@@ -12,7 +12,14 @@ None.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
+(for sub 5.x)
+
     kibana_version: "4.6"
+    
+(for >= 5.x)    
+
+    kibana_version: "5.x"    
+    kibana_version: "6.x"
 
 The version of kibana to install (major and minor only).
 
