@@ -14,4 +14,4 @@
   post_tasks:
     - name: Ensure Kibana is running.
       uri:
-        url: http://localhost:5601/login
+        url: http://127.0.0.1:5601/login
