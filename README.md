@@ -16,6 +16,11 @@ Available variables are listed below, along with default values (see `defaults/m
 
 The version of kibana to install.
 
+    kibana_package: kibana
+    kibana_package_state: present
+
+The specific package to be installed. You can specify a version of the package using the correct syntax for your platform and package manager by changing the package name. You can also control the package state (e.g. `present`, `absent`, or `latest`).
+
     kibana_service_state: started
     kibana_service_enabled: true
 

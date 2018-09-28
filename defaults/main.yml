@@ -1,6 +1,9 @@
 ---
 kibana_version: "6.x"
 
+kibana_package: kibana
+kibana_package_state: present
+
 kibana_service_state: started
 kibana_service_enabled: true
 
