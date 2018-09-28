@@ -1,5 +1,10 @@
 ---
-kibana_version: "4.6"
+kibana_version: "6.x"
+
+kibana_service_state: started
+kibana_service_enabled: true
+
+kibana_config_file_path: /etc/kibana/kibana.yml
 
 kibana_server_port: 5601
 kibana_server_host: "0.0.0.0"

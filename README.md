@@ -12,9 +12,18 @@ None.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    kibana_version: "4.6"
+    kibana_version: "6.x"
 
-The version of kibana to install (major and minor only).
+The version of kibana to install.
+
+    kibana_service_state: started
+    kibana_service_enabled: true
+
+Controls whether the `kibana` service is started and enabled on system boot.
+
+    kibana_config_file_path: /etc/kibana/kibana.yml
+
+The path to the Kibana configuration file.
 
     kibana_server_port: 5601
     kibana_server_host: "0.0.0.0"
