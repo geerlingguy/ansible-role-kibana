@@ -21,9 +21,10 @@ The version of kibana to install.
 
 Controls whether the `kibana` service is started and enabled on system boot.
 
+    kibana_config_template: kibana.yml.j2
     kibana_config_file_path: /etc/kibana/kibana.yml
 
-The path to the Kibana configuration file.
+The template to use for the Kibana config file, and the path to which the config file will be written.
 
     kibana_server_port: 5601
     kibana_server_host: "0.0.0.0"

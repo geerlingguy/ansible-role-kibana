@@ -16,7 +16,7 @@
 
 - name: Copy Kibana configuration.
   template:
-    src: kibana.yml.j2
+    src: "{{ kibana_config_template }}"
     dest: "{{ kibana_config_file_path }}"
     owner: root
     group: root
