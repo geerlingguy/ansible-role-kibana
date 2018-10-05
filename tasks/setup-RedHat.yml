@@ -9,3 +9,15 @@
     src: kibana.repo.j2
     dest: /etc/yum.repos.d/kibana.repo
     mode: 0644
+
+- name: Install latest Kibana in branch.
+  package:
+    name: "{{ kibana_package }}"
+    state: "{{ kibana_package_state }}"
+  when: kibana_version | regex_search('^\d+\.x')
+
+- name: Install specified Kibana release.
+  package:
+    name: "{{ kibana_package }}-{{ kibana_version }}"
+    state: "{{ kibana_package_state }}"
+  when: kibana_version | regex_search('^\d+\.\d+')
