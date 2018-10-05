@@ -5,11 +5,6 @@
 - include: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- name: Install Kibana.
-  package:
-    name: "{{ kibana_package }}"
-    state: "{{ kibana_package_state }}"
-
 - name: Ensure Kibana is started and enabled at boot.
   service:
     name: kibana

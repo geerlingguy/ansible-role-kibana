@@ -9,6 +9,20 @@
 
 - name: Add Kibana repository.
   apt_repository:
-    repo: 'deb https://artifacts.elastic.co/packages/{{ kibana_version }}/apt stable main'
+    repo: "deb https://artifacts.elastic.co/packages/\
+      {{ kibana_version | regex_replace('^(\\d+\\.).*', '\\1x') }}/\
+      apt stable main"
     state: present
     update_cache: true
+
+- name: Install latest Kibana in branch.
+  package:
+    name: "{{ kibana_package }}"
+    state: "{{ kibana_package_state }}"
+  when: kibana_version | regex_search('^\d+\.x')
+
+- name: Install specified Kibana release.
+  package:
+    name: "{{ kibana_package }}={{ kibana_version }}"
+    state: "{{ kibana_package_state }}"
+  when: kibana_version | regex_search('^\d+\.\d+')
