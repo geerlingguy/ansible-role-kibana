@@ -40,6 +40,11 @@ The FQDN or IP address and port Kibana should use.
 
 The URL (including port) over which Kibana will connect to Elasticsearch.
 
+    kibana_elasticsearch_username: ""
+    kibana_elasticsearch_password: ""
+
+If Elasticsearch is protected by HTTP basic authentication, set the username and password so Kibana can connect.
+
 ## Dependencies
 
 None.
