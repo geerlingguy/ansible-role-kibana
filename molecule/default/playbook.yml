@@ -1,0 +1,22 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+
+  pre_tasks:
+    - name: Update apt cache.
+      apt: update_cache=true cache_valid_time=600
+      when: ansible_os_family == 'Debian'
+
+  roles:
+    - role: geerlingguy.kibana
+
+  post_tasks:
+    - name: Ensure Kibana is running.
+      uri:
+        url: http://127.0.0.1:5601/login
+        status_code: 200
+      register: result
+      until: result.status == 200
+      retries: 60
+      delay: 1
