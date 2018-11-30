@@ -15,7 +15,7 @@
   include: kibana-plugins.yml
   when: kibana_plugins is defined or kibana_plugins_reinstall
   tags:
-      - plugins
+    - plugins
 
 - name: Ensure Kibana is started and enabled at boot.
   service:
