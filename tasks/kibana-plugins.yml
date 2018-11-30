@@ -29,7 +29,7 @@
 # commmand fails if the Kibana version is different than the plugin version.
 - name: Check installed kibana plugins
   become: true
-  shell: "ls {{kibana_home}}/plugins {{list_command}}"
+  command: "ls {{kibana_home}}/plugins {{list_command}}"
   register: installed_plugins
   changed_when: false
   ignore_errors: true
@@ -83,7 +83,6 @@
   command: "{{kibana_home}}/bin/kibana-plugin remove {{item}} --silent"
   with_items: "{{ plugins_to_remove | default([]) }}"
   notify: restart kibana
-  register: plugin_removed
 
 - name: Install kibana plugins
   become: true
