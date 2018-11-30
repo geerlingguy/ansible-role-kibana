@@ -4,8 +4,14 @@ kibana_version: "6.x"
 kibana_package: kibana
 kibana_package_state: present
 
+kibana_plugins_reinstall: false
+
 kibana_service_state: started
 kibana_service_enabled: true
+
+kibana_home: /usr/share/kibana
+kibana_user: kibana
+kibana_group: kibana
 
 kibana_config_template: kibana.yml.j2
 kibana_config_file_path: /etc/kibana/kibana.yml
