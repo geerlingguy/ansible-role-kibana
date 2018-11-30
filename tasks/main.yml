@@ -5,9 +5,14 @@
 - include: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
+- name: set specific kibana version to install
+  set_fact:
+    kibana_package: "{{ kibana_package }}-{{ kibana_full_version }}"
+  when: kibana_full_version is defined and kibana_full_version != ''
+
 - name: Install Kibana.
   package:
-    name: "{{ kibana_package }}{% if kibana_full_version is defined and kibana_full_version != ''  %}-{{ kibana_full_version }}{% endif %}"
+    name: "{{ kibana_package }}"
     state: "{{ kibana_package_state }}"
   register: kibana_install
 
