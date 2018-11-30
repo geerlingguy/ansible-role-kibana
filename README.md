@@ -45,6 +45,20 @@ The URL (including port) over which Kibana will connect to Elasticsearch.
 
 If Elasticsearch is protected by HTTP basic authentication, set the username and password so Kibana can connect.
 
+#### Kibana Version
+
+If installing a specific version of Kibana, specify the following:
+
+    kibana_full_version: "6.5.1"
+    
+#### Plugins
+
+Plugins can be installed like the following:
+
+    kibana_plugins:
+      - plugin: my_plugin
+        url: url_to_my_plugin
+
 ## Dependencies
 
 None.
