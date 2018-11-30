@@ -6,9 +6,9 @@
 # setting.
 - name: set fact kibana_plugins_reinstall to true
   set_fact: kibana_plugins_reinstall=true
-  when: (kibana_install is defined and kibana_install.changed) or
+  when: ((kibana_install is defined and kibana_install.changed) or
         kibana_plugins is not defined or
-        kibana_plugins is none
+        kibana_plugins is none)
 
 - name: set fact list_command
   set_fact: list_command=""
@@ -81,8 +81,9 @@
 - name: Remove kibana plugins
   become: true
   command: "{{kibana_home}}/bin/kibana-plugin remove {{item}} --silent"
-  with_items: "{{ plugins_to_remove | default([]) }}"
+  with_items: "{{ plugins_to_remove }}"
   notify: restart kibana
+  when: plugins_to_remove
 
 - name: Install kibana plugins
   become: true
