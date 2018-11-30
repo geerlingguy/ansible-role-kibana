@@ -28,11 +28,11 @@
 # List currently installed plugins. We have to list the directories as the list
 # commmand fails if the Kibana version is different than the plugin version.
 - name: Check installed kibana plugins
-  become: yes
+  become: true
   shell: "ls {{kibana_home}}/plugins {{list_command}}"
   register: installed_plugins
-  changed_when: False
-  ignore_errors: yes
+  changed_when: false
+  ignore_errors: true
 
 # if kibana_plugins_reinstall is set to true we remove ALL plugins
 - name: set fact plugins_to_remove to install_plugins.stdout_lines
@@ -79,14 +79,14 @@
 # This removes any currently installed plugins (to prevent errors when
 # reinstalling)
 - name: Remove kibana plugins
-  become: yes
+  become: true
   command: "{{kibana_home}}/bin/kibana-plugin remove {{item}} --silent"
   with_items: "{{ plugins_to_remove | default([]) }}"
   notify: restart kibana
   register: plugin_removed
 
 - name: Install kibana plugins
-  become: yes
+  become: true
   command: "{{kibana_home}}/bin/kibana-plugin install {{ item.url | default(item.plugin) }} --silent"
   register: plugin_installed
   changed_when: plugin_installed.rc == 0
@@ -99,10 +99,10 @@
 
 # Set permissions on plugins directory
 - name: Set Plugin Directory Permissions
-  become: yes
+  become: true
   file:
     state: directory
     path: "{{ kibana_home }}/plugins"
     owner: "{{ kibana_user }}"
     group: "{{ kibana_group }}"
-    recurse: yes
+    recurse: true
