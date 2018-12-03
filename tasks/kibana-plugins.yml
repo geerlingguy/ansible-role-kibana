@@ -10,26 +10,11 @@
         kibana_plugins is not defined or
         kibana_plugins is none)
 
-- name: set fact list_command
-  set_fact: list_command=""
-
-# If we are reinstalling all plugins, e.g. to a version change, we need to
-# remove all plugins (inc. x-pack) to install any plugins. Otherwise we don't
-# consider x-pack so the role stays idempotent.
-- name: set fact list_command check for x-pack
-  set_fact: list_command="| grep -vE 'x-pack'"
-  when: not kibana_plugins_reinstall
-
-- name: remove x-pack plugin directory when it isn't a plugin
-  file:
-    dest: "{{ kibana_home }}/plugins/x-pack"
-    state: "absent"
-
 # List currently installed plugins. We have to list the directories as the list
 # commmand fails if the Kibana version is different than the plugin version.
 - name: Check installed kibana plugins
   become: true
-  command: "ls {{kibana_home}}/plugins {{list_command}}"
+  command: "ls {{kibana_home}}/plugins"
   register: installed_plugins
   changed_when: false
   ignore_errors: true
