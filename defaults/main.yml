@@ -16,3 +16,7 @@ kibana_server_host: "0.0.0.0"
 kibana_elasticsearch_url: "http://localhost:9200"
 kibana_elasticsearch_username: ""
 kibana_elasticsearch_password: ""
+
+# if set to false ansible will not install repo for kibana and just call and
+# install trough package manager, useful if you manage your own repo and packages
+kibana_install_repo: true
