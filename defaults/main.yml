@@ -16,3 +16,15 @@ kibana_server_host: "0.0.0.0"
 kibana_elasticsearch_url: "http://localhost:9200"
 kibana_elasticsearch_username: ""
 kibana_elasticsearch_password: ""
+
+kibana_enable_ssl: false
+kibana_insecure_ssl: false   # enable when using a self-signed cert and not a custom CA
+kibana_ssl_dir: /etc/pki/kibana
+kibana_ssl_key_file: ""
+kibana_ssl_certificate_file: ""
+kibana_ssl_certificate_authority:    # useful when using your own Certificate Authority
+
+kibana_es_uses_ssl: false
+kibana_es_ssl_dir: /etc/pki/kibana
+kibana_es_ssl_certificate_file: ""
+kibana_es_ssl_key_file: ""

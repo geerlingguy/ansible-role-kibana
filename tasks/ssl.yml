@@ -1,0 +1,42 @@
+---
+- local_action: stat path="{{ role_path }}/files/{{ kibana_ssl_key_file }}"
+  register: kibana_keyfile
+
+- local_action: stat path="{{ role_path }}/files/{{ kibana_ssl_certificate_file }}"
+  register: kibana_crtfile
+
+- local_action: stat path="{{ role_path }}/files/{{ kibana_ssl_certificate_authority }}"
+  register: kibana_cafile
+
+- name: ensure certificate directory exists
+  file:
+    dest: "{{ kibana_ssl_dir }}"
+    state: directory
+    mode: 0700
+    owner: kibana
+    group: kibana 
+
+- name: Copy Kibana SSL/TLS certificate
+  copy:
+    src: "{{ kibana_ssl_certificate_file }}"
+    dest: "{{ kibana_ssl_dir }}/{{ kibana_ssl_certificate_file | basename }}"
+    mode: 0600
+    owner: kibana
+    group: kibana
+  when: kibana_crtfile.stat.exists|bool and kibana_crtfile.stat.isreg|bool
+
+- name: Copy Kibana SSL/TLS key
+  copy:
+    src: "{{ kibana_ssl_key_file }}"
+    dest: "{{ kibana_ssl_dir }}/{{ kibana_ssl_key_file | basename }}"
+    mode: 0600
+    owner: kibana
+    group: kibana
+  when: kibana_keyfile.stat.exists|bool and kibana_keyfile.stat.isreg|bool
+
+- name: Configure certificate authority
+  copy:
+    src: "{{ kibana_ssl_certificate_authority }}"
+    dest: "{{ kibana_ssl_dir }}/{{ kibana_ssl_certificate_authority | basename }}"
+    mode: 0644
+  when: kibana_cafile.stat.exists|bool and kibana_cafile.stat.isreg|bool

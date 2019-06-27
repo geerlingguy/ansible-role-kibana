@@ -16,6 +16,8 @@
     state: "{{ kibana_service_state }}"
     enabled: "{{ kibana_service_enabled }}"
 
+- include: ssl.yml
+
 - name: Copy Kibana configuration.
   template:
     src: "{{ kibana_config_template }}"
