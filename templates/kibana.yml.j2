@@ -25,7 +25,11 @@ server.host: "{{ kibana_server_host }}"
 #server.name: "your-hostname"
 
 # The URL of the Elasticsearch instance to use for all your queries.
+{% if kibana_version == "7.x" %}
+elasticsearch.hosts: [ {{ kibana_elasticsearch_url }} ]
+{% else %}
 elasticsearch.url: {{ kibana_elasticsearch_url }}
+{% endif %}
 
 # When this setting's value is true Kibana uses the hostname specified in the server.host
 # setting. When the value of this setting is false, Kibana uses the hostname of the host
