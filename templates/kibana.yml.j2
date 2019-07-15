@@ -121,3 +121,7 @@ elasticsearch.password: "{{ kibana_elasticsearch_password }}"
 # The default locale. This locale can be used in certain circumstances to substitute any missing
 # translations.
 #i18n.defaultLocale: "en"
+
+{% if kibana_config %}
+{{ kibana_config | to_nice_yaml }}
+{% endif %}
