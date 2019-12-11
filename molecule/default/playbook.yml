@@ -9,6 +9,7 @@
       when: ansible_os_family == 'Debian'
 
   roles:
+    - role: geerlingguy.elasticsearch
     - role: geerlingguy.kibana
 
   post_tasks:
