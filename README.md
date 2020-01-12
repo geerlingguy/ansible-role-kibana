@@ -49,6 +49,13 @@ The URL (including port) over which Kibana will connect to Elasticsearch.
 
 If Elasticsearch is protected by HTTP basic authentication, set the username and password so Kibana can connect.
 
+If you need to add any other option into kibana.yml (for example xpack.security), you can use:
+
+  kibana_config: {
+    xpack.security.enabled: true
+  }
+
+
 ## Dependencies
 
 None.
