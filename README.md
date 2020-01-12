@@ -12,12 +12,16 @@ None.
 
 Available variables are listed below, along with default values (see `defaults/main.yml`):
 
-    kibana_version: "6.x"
+    kibana_version: "7.x"
 
 The version of kibana to install.
 
     kibana_package: kibana
     kibana_package_state: present
+
+Choose if use existing repo (false) in system or add repository (true, default)
+    
+    kibana_add_repository: true
 
 The specific package to be installed. You can specify a version of the package using the correct syntax for your platform and package manager by changing the package name. You can also control the package state (e.g. `present`, `absent`, or `latest`).
 

@@ -1,5 +1,6 @@
 ---
-kibana_version: "6.x"
+kibana_add_repository: true
+kibana_version: "7.x"
 
 kibana_package: kibana
 kibana_package_state: present
