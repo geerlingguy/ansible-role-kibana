@@ -45,6 +45,12 @@ The URL (including port) over which Kibana will connect to Elasticsearch.
 
 If Elasticsearch is protected by HTTP basic authentication, set the username and password so Kibana can connect.
 
+    kibana_ssl.enabled: true
+    kibana_ssl.certificate: /path/to/certificate
+    kibana_ssl.key: /path/to/key
+
+Activates SSL 
+
 ## Dependencies
 
 None.
