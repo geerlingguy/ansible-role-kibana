@@ -43,6 +43,29 @@ The URL (including port) over which Kibana will connect to Elasticsearch.
     kibana_elasticsearch_username: ""
     kibana_elasticsearch_password: ""
 
+The TLS status of Kibana.
+
+    kibana_server_ssl_enabled: false
+
+The server certificate and private keys paths or path to PKCS#12 file where your server certificate and private key are contained.
+
+    kibana_server_ssl_certificate_path: ""
+    kibana_server_ssl_key_path: ""
+
+    kibana_server_ssl_keystore_path: ""
+
+The PKCS#12 decryption password.
+    
+    kibana_server_ssl_keystore_password: ""
+
+The Elasticsearch CA certificate for Kibana to trust.
+    
+    kibana_elasticsearch_ssl_certificate_authorities_path: ""
+
+The verification of the server certificate that Kibana receives when making an outbound SSL/TLS connection to Elasticsearch.
+
+    kibana_elasticsearch_ssl_verification_mode: ""
+
 If Elasticsearch is protected by HTTP basic authentication, set the username and password so Kibana can connect.
 
 ## Dependencies

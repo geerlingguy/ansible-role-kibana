@@ -16,3 +16,11 @@ kibana_server_host: "0.0.0.0"
 kibana_elasticsearch_url: "http://localhost:9200"
 kibana_elasticsearch_username: ""
 kibana_elasticsearch_password: ""
+
+kibana_server_ssl_enabled: false
+kibana_server_ssl_certificate_path: ""
+kibana_server_ssl_key_path: ""
+kibana_server_ssl_keystore_path: ""
+kibana_server_ssl_keystore_password: ""
+kibana_elasticsearch_ssl_certificate_authorities_path: ""
+kibana_elasticsearch_ssl_verification_mode: ""
