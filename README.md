@@ -45,6 +45,11 @@ The URL (including port) over which Kibana will connect to Elasticsearch.
 
 If Elasticsearch is protected by HTTP basic authentication, set the username and password so Kibana can connect.
 
+
+    kibana_repository_url: "https://artifacts.elastic.co"
+
+The URL where install packages will be pulled from. Allows a local repository to be used.
+
 ## Dependencies
 
 None.
