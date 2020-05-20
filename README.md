@@ -38,6 +38,12 @@ The FQDN or IP address and port Kibana should use.
 
     kibana_elasticsearch_url: "http://localhost:9200"
 
+The SSL configuration and path to certificate and key.
+
+    kibana_ssl_enabled: false
+    kibana_ssl_path_certificate: /path/to/certificate.pem
+    kibana_ssl_path_key: /path/to/certificate.pem
+
 The URL (including port) over which Kibana will connect to Elasticsearch.
 
     kibana_elasticsearch_username: ""
