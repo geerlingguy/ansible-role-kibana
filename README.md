@@ -43,6 +43,12 @@ The URL (including port) over which Kibana will connect to Elasticsearch.
     kibana_elasticsearch_username: ""
     kibana_elasticsearch_password: ""
 
+The log file path and verbose boolean.
+
+    kibana_log_enabled: false
+    kibana_log_path: "var/log/kibana.log"
+    kibana_log_verbose: false
+
 If Elasticsearch is protected by HTTP basic authentication, set the username and password so Kibana can connect.
 
 ## Dependencies
