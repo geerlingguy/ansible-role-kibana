@@ -98,21 +98,29 @@ elasticsearch.password: "{{ kibana_elasticsearch_password }}"
 # Logs queries sent to Elasticsearch. Requires logging.verbose set to true.
 #elasticsearch.logQueries: false
 
+
 # Specifies the path where Kibana creates the process ID file.
 #pid.file: /var/run/kibana.pid
 
+{% if kibana_log_enabled and kibana_log_path %}
+logging.dest: {{ kibana_log_path }}
+{% else %}
 # Enables you specify a file where Kibana stores log output.
 #logging.dest: stdout
-
+{% endif %}
 # Set the value of this setting to true to suppress all logging output.
 #logging.silent: false
 
 # Set the value of this setting to true to suppress all logging output other than error messages.
 #logging.quiet: false
 
+{% if kibana_log_enabled and kibana_log_verbose %}
+logging.verbose: true
+{% else %}
 # Set the value of this setting to true to log all events, including system usage information
 # and all requests.
 #logging.verbose: false
+{% endif %}
 
 # Set the interval in milliseconds to sample system and process performance
 # metrics. Minimum is 100ms. Defaults to 5000.

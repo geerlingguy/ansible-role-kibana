@@ -24,3 +24,11 @@
     group: root
     mode: 0644
   notify: restart kibana
+
+- name: Ensure log file exsits and permissions are ok.
+  file:
+    path: "{{ kibana_log_path }}"
+    owner: kibana
+    group: kibana
+    state: touch
+  when: kibana_log_enabled

@@ -16,3 +16,7 @@ kibana_server_host: "0.0.0.0"
 kibana_elasticsearch_url: "http://localhost:9200"
 kibana_elasticsearch_username: ""
 kibana_elasticsearch_password: ""
+
+kibana_log_enabled: false
+kibana_log_path: "/var/log/kibana.log"
+kibana_log_verbose: false
