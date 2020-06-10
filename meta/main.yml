@@ -2,6 +2,7 @@
 dependencies: []
 
 galaxy_info:
+  role_name: kibana
   author: geerlingguy
   description: Kibana for Linux.
   company: "Midwestern Mac, LLC"
