@@ -55,10 +55,6 @@ If Elasticsearch is protected by HTTP basic authentication, set the username and
 
 Set trusted CAs for Kibana to TLS / SSL elasticsearch cluster
 
-    kibana_repository_url: "https://artifacts.elastic.co"
-
-The URL where install packages will be pulled from. Allows a local repository to be used.
-
 ## Dependencies
 
 None.
