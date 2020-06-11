@@ -36,6 +36,12 @@ The template to use for the Kibana config file, and the path to which the config
 
 The FQDN or IP address and port Kibana should use.
 
+    kibana_server_ssl_enabled: false
+    kibana_server_ssl_certificate: "/path/to/server/cert"
+    kibana_server_ssl_key: "/path/to/server/private/key"
+
+Enable TLS / SSL for clients connecting to the Kibana UI
+
     kibana_elasticsearch_url: "http://localhost:9200"
 
 The URL (including port) over which Kibana will connect to Elasticsearch.
@@ -45,6 +51,9 @@ The URL (including port) over which Kibana will connect to Elasticsearch.
 
 If Elasticsearch is protected by HTTP basic authentication, set the username and password so Kibana can connect.
 
+    kibana_elasticsearch_certificateAuthorities: null
+
+Set trusted CAs for Kibana to TLS / SSL elasticsearch cluster
 
     kibana_repository_url: "https://artifacts.elastic.co"
 

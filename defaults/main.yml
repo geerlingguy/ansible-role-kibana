@@ -18,3 +18,13 @@ kibana_elasticsearch_username: ""
 kibana_elasticsearch_password: ""
 
 kibana_repository_url: "https://artifacts.elastic.co"
+
+# Enable TLS / SSL for clients connecting to the Kibana UI
+kibana_server_ssl_enabled: false
+kibana_server_ssl_certificate: "/path/to/server/cert"
+kibana_server_ssl_key: "/path/to/server/private/key"
+
+# Set trusted CA for Kibana to TLS / SSL elasticsearch cluster
+kibana_elasticsearch_certificateAuthorities: null
+# This is a list of filenames like:
+# kibana_elasticsearch_certificateAuthorities: '[ "/etc/pki/ca-trust/source/anchors/ca-chain.crt" ]'
