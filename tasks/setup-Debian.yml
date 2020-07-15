@@ -5,14 +5,17 @@
       - apt-transport-https
       - gnupg2
     state: present
+  when: kibana_add_repo|bool
 
 - name: Add Elasticsearch apt key.
   apt_key:
     url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
     state: present
+  when: kibana_add_repo|bool
 
 - name: Add Kibana repository.
   apt_repository:
     repo: 'deb https://artifacts.elastic.co/packages/{{ kibana_version }}/apt stable main'
     state: present
     update_cache: true
+  when: kibana_add_repo|bool

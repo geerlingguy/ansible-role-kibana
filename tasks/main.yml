@@ -1,9 +1,13 @@
 ---
 - include: setup-RedHat.yml
-  when: ansible_os_family == 'RedHat'
+  when: 
+    - ansible_os_family == 'RedHat'
+    - kibana_add_repo|bool
 
 - include: setup-Debian.yml
-  when: ansible_os_family == 'Debian'
+  when: 
+    - ansible_os_family == 'Debian'
+    - kibana_add_repo|bool
 
 - name: Install Kibana.
   package:
