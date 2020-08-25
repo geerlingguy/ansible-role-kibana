@@ -10,7 +10,11 @@ None.
 
 ## Role Variables
 
-Available variables are listed below, along with default values (see `defaults/main.yml`):
+All Kibana configuration parameters are supported. This is achieved using a configuration map parameter `kibana_conf` which is serialized into the ${kibana}.yml file. The use of a map ensures the Ansible playbook does not need to be updated to reflect new/deprecated/plugin configuration parameters.
+
+    kibana_conf: ""
+
+In addition to the kibana_conf map, several other parameters are supported for basic functions. These can be found below.
 
     kibana_version: "7.x"
 

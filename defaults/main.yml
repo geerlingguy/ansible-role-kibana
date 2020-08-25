@@ -1,4 +1,6 @@
 ---
+kibana_conf: ""
+
 kibana_version: "7.x"
 
 kibana_package: kibana
