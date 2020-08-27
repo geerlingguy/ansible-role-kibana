@@ -122,4 +122,6 @@ elasticsearch.password: "{{ kibana_elasticsearch_password }}"
 # translations.
 #i18n.defaultLocale: "en"
 
+{% if kibana_conf %}
 {{ kibana_conf | to_nice_yaml(indent=2) }}
+{% endif %}
