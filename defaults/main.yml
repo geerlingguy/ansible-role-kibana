@@ -1,5 +1,6 @@
 ---
 kibana_version: "7.x"
+kibana_version_lock: false
 
 kibana_package: kibana
 kibana_package_state: present

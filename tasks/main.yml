@@ -10,6 +10,14 @@
     name: "{{ kibana_package }}"
     state: "{{ kibana_package_state }}"
 
+- name: Ensure Kibana log folder is created
+  file: 
+    path: "{{ kibana_log_path }}"
+    state: directory
+    owner: kibana
+    group: kibana
+  when: kibana_log_path is defined and kibana_log_path != ""
+
 - name: Ensure Kibana is started and enabled at boot.
   service:
     name: kibana

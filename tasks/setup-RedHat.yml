@@ -9,3 +9,59 @@
     src: kibana.repo.j2
     dest: /etc/yum.repos.d/kibana.repo
     mode: 0644
+
+- name: RedHat - Install Kibana
+  become: yes
+  yum:
+    name: '{{ kibana_package }}{% if kibana_pkg_version is defined and kibana_pkg_version != ""  %}-{{ kibana_pkg_version }}{% endif %}'
+    state: "{{ kibana_package_state }}"
+    update_cache: yes
+  retries: 5
+  delay: 10
+
+- name: RedHat - install yum-version-lock
+  become: yes
+  yum:
+    name: yum-plugin-versionlock
+    state: present
+    update_cache: yes
+
+- name: RedHat - check if requested Kibana version lock exists
+  become: yes
+  shell: yum versionlock list | grep -c {{kibana_package}}-{{kibana_pkg_version}}
+  register: kb_requested_version_locked
+  args:
+    warn: false
+  failed_when: False
+  changed_when: False
+  check_mode: False
+
+- name: RedHat - lock Kibana version
+  become: yes
+  shell: yum versionlock delete 0:kibana* ; yum versionlock add {{ kibana_package }}-{{ kibana_pkg_version }}
+  args:
+    warn: false
+  when:
+    - kibana_version_lock
+    - kb_requested_version_locked is defined
+    - kb_requested_version_locked.stdout|int == 0
+
+- name: RedHat - check if any Kibana version lock exists
+  become: yes
+  shell: yum versionlock list | grep -c kibana
+  register: kibana_version_locked
+  args:
+    warn: false
+  failed_when: False
+  changed_when: False
+  check_mode: False
+
+- name: RedHat - unlock kibana version
+  become: yes
+  shell: yum versionlock delete 0:kibana*
+  args:
+    warn: false
+  when:
+    - not kibana_version_lock
+    - kibana_version_locked is defined
+    - kibana_version_locked.stdout|int > 0
