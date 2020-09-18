@@ -11,7 +11,7 @@
     state: "{{ kibana_package_state }}"
 
 - name: Ensure Kibana log folder is created
-  file: 
+  file:
     path: "{{ kibana_log_path }}"
     state: directory
     owner: kibana
