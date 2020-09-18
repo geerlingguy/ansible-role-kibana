@@ -47,17 +47,19 @@
         - kibana_version_lock
         - kb_requested_version_locked is defined
         - kb_requested_version_locked.stdout|int == 0
-
-    - name: RedHat - check if any Kibana version lock exists
-      become: yes
-      shell: set -o pipefail && yum versionlock list | grep -c kibana
-      register: kibana_version_locked
-      args:
-        warn: false
-      failed_when: False
-      changed_when: False
-      check_mode: False
   when: kibana_version_lock
+
+- name: RedHat - check if any Kibana version lock exists
+  become: yes
+  shell: set -o pipefail && yum versionlock list | grep -c kibana
+  register: kibana_version_locked
+  args:
+    warn: false
+  failed_when: False
+  changed_when: False
+  check_mode: False
+  when:
+    - not kibana_version_lock
 
 - name: RedHat - unlock kibana version
   become: yes
