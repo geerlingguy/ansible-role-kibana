@@ -17,7 +17,7 @@
     state: directory
     owner: kibana
     group: root
-  when: kibana_log_path | bool
+  when: kibana_log_path is defined and kibana_log_path | length > 0
 
 - name: Ensure Kibana is started and enabled at boot.
   service:
