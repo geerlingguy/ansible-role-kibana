@@ -19,7 +19,7 @@
 
 - name: Debian - Ensure Kibana is installed
   apt:
-    name: '{{ kibana_package }}{% if kibana_pkg_version is defined and kibana_pkg_version != "" %}={{ kibana_pkg_version }}{% endif %}'
+    name: '{{ kibana_package }}{% if kibana_pkg_version | bool %}={{ kibana_pkg_version }}{% endif %}'
     state: "{{ kibana_package_state }}"
     cache_valid_time: 86400
 

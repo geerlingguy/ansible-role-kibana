@@ -13,7 +13,7 @@
 - name: RedHat - Install Kibana
   become: yes
   yum:
-    name: '{{ kibana_package }}{% if kibana_pkg_version is defined and kibana_pkg_version != ""  %}-{{ kibana_pkg_version }}{% endif %}'
+    name: '{{ kibana_package }}{% if kibana_pkg_version | bool  %}-{{ kibana_pkg_version }}{% endif %}'
     state: "{{ kibana_package_state }}"
     update_cache: yes
   retries: 5
@@ -28,7 +28,7 @@
 
 - name: RedHat - check if requested Kibana version lock exists
   become: yes
-  shell: yum versionlock list | grep -c {{kibana_package}}-{{kibana_pkg_version}}
+  shell: set -o pipefail && yum versionlock list | grep -c {{ kibana_package }}-{{ kibana_pkg_version }}
   register: kb_requested_version_locked
   args:
     warn: false
@@ -48,7 +48,7 @@
 
 - name: RedHat - check if any Kibana version lock exists
   become: yes
-  shell: yum versionlock list | grep -c kibana
+  shell: set -o pipefail && yum versionlock list | grep -c kibana
   register: kibana_version_locked
   args:
     warn: false
