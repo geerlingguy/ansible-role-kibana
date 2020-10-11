@@ -1,5 +1,6 @@
 ---
 kibana_version: "7.x"
+kibana_apt_mirror: https://artifacts.elastic.co/packages/
 
 kibana_package: kibana
 kibana_package_state: present
