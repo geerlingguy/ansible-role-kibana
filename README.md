@@ -1,6 +1,6 @@
 # Ansible Role: Kibana
 
-[![Build Status](https://travis-ci.org/geerlingguy/ansible-role-kibana.svg?branch=master)](https://travis-ci.org/geerlingguy/ansible-role-kibana)
+[![Build Status](https://travis-ci.com/geerlingguy/ansible-role-kibana.svg?branch=master)](https://travis-ci.com/geerlingguy/ansible-role-kibana)
 
 An Ansible Role that installs Kibana on RedHat/CentOS or Debian/Ubuntu.
 
