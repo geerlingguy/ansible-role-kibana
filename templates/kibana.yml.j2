@@ -79,7 +79,7 @@ elasticsearch.password: "{{ kibana_elasticsearch_password }}"
 
 # Time in milliseconds to wait for responses from the back end or Elasticsearch. This value
 # must be a positive integer.
-#elasticsearch.requestTimeout: 30000
+elasticsearch.requestTimeout: {{ kibana_elasticsearch_requestTimeout }}
 
 # List of Kibana client-side headers to send to Elasticsearch. To send *no* client-side
 # headers, set this value to [] (an empty list).
@@ -90,7 +90,7 @@ elasticsearch.password: "{{ kibana_elasticsearch_password }}"
 #elasticsearch.customHeaders: {}
 
 # Time in milliseconds for Elasticsearch to wait for responses from shards. Set to 0 to disable.
-#elasticsearch.shardTimeout: 30000
+elasticsearch.shardTimeout: {{ kibana_elasticsearch_shardTimeout }}
 
 # Time in milliseconds to wait for Elasticsearch at Kibana startup before retrying.
 #elasticsearch.startupTimeout: 5000
