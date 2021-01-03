@@ -109,7 +109,7 @@ elasticsearch.password: "{{ kibana_elasticsearch_password }}"
 
 # Set the value of this setting to true to suppress all logging output other than error messages.
 {% if kibana_logging_quiet == yes %}
-#logging.quiet: true
+logging.quiet: true
 {% else %}
 #logging.quiet: false
 {% endif %}
