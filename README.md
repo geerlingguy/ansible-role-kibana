@@ -45,6 +45,10 @@ The URL (including port) over which Kibana will connect to Elasticsearch.
 
 If Elasticsearch is protected by HTTP basic authentication, set the username and password so Kibana can connect.
 
+    kibana_logging_quiet: yes
+
+Only commit errors to syslog, stop logging Kibana Access logs
+
 ## Dependencies
 
 None.
