@@ -11,10 +11,10 @@ kibana_config_template: kibana.yml.j2
 kibana_config_file_path: /etc/kibana/kibana.yml
 
 kibana_ssl_access: false
+kibana_ssl_verification_mode: full
 kibana_cert_path: /etc/kibana/certs/
 kibana_ssl_certificate: ""
 kibana_ssl_key: ""
-kibana_ssl_verification_mode: full
 
 kibana_server_port: 5601
 kibana_server_host: "0.0.0.0"

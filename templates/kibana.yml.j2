@@ -81,7 +81,7 @@ server.ssl.key: {{ kibana_cert_path }}ssl.key
 elasticsearch.ssl.verificationMode: {{ kibana_ssl_verification_mode }} 
 {% else %}
 #elasticsearch.ssl.verificationMode: full
-{% end if %}
+{% endif %}
 
 # Time in milliseconds to wait for Elasticsearch to respond to pings. Defaults to the value of
 # the elasticsearch.requestTimeout setting.
