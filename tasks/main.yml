@@ -15,7 +15,7 @@
     name: kibana
     state: "{{ kibana_service_state }}"
     enabled: "{{ kibana_service_enabled }}"
-    
+
 - name: Copy Kibana configuration.
   template:
     src: "{{ kibana_config_template }}"
@@ -43,7 +43,7 @@
     group: kibana
     mode: 0744
   loop:
-    - { file: "{{kibana_ssl_certificate}}", destination: 'ssl.crt' }
-    - { file: "{{kibana_ssl_key}}", destination: 'ssl.key' }
+    - {file: "{{kibana_ssl_certificate}}", destination: 'ssl.crt'}
+    - {file: "{{kibana_ssl_key}}", destination: 'ssl.key'}
   when: kibana_ssl_access and kibana_ssl_certificate and kibana_ssl_key
   notify: restart kibana
