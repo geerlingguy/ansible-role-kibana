@@ -28,7 +28,7 @@
 - name: Create SSL certs folder
   file:
     path: "{{ kibana_cert_path }}"
-    force: yes
+    force: true
     state: directory
     owner: kibana
     group: kibana
