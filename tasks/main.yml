@@ -28,19 +28,20 @@
 - name: Create SSL certs folder
   file:
     path: "{{ kibana_cert_path }}"
+    force: yes
     state: directory
-    owner: root
-    group: root
-    mode: 0644
+    owner: kibana
+    group: kibana
+    mode: 0744
   when: kibana_ssl_access and kibana_ssl_certificate and kibana_ssl_key
 
 - name: Copy ssl certificates for HTTPS.
   copy:
     src: "{{ item.file }}"
     dest: "{{ kibana_cert_path }}{{ item.destination }}"
-    owner: root
-    group: root
-    mode: 0644
+    owner: kibana
+    group: kibana
+    mode: 0744
   loop:
     - { file: "{{kibana_ssl_certificate}}", destination: 'ssl.crt' }
     - { file: "{{kibana_ssl_key}}", destination: 'ssl.key' }
