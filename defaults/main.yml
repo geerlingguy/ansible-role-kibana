@@ -18,3 +18,4 @@ kibana_elasticsearch_username: ""
 kibana_elasticsearch_password: ""
 
 kibana_config: {}
+kibana_add_repository: true
