@@ -25,6 +25,6 @@
 
 - name: Debian - hold Kibana version
   dpkg_selections:
-    name: "{{ kibana_pkg_version }}"
+    name: "{{ kibana_package }}"
     selection: "hold"
   when: kibana_version_lock
