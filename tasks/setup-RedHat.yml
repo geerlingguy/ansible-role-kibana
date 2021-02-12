@@ -9,3 +9,6 @@
     src: kibana.repo.j2
     dest: /etc/yum.repos.d/kibana.repo
     mode: 0644
+
+- name: Version separator
+  set_fact: version_separator="-"

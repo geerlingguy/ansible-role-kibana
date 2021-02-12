@@ -7,7 +7,7 @@
 
 - name: Install Kibana.
   package:
-    name: '{{ kibana_package }}{% if kibana_version is defined and kibana_version != "" %}={{ kibana_version }}{% endif %}'
+    name: '{{ kibana_package }}{% if kibana_version is defined and kibana_version != "" %}{{ version_separator }}{{ kibana_version }}{% endif %}'
     state: "{{ kibana_package_state }}"
 
 - name: Ensure Kibana is started and enabled at boot.

@@ -29,3 +29,6 @@
     name: "{{ kibana_package }}"
     selection: "install"
   when: not kibana_version_lock or (installed_kibana_version.stdout and installed_kibana_version.stdout != kibana_version)
+
+- name: Version separator
+  set_fact: version_separator="="
