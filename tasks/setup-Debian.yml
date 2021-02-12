@@ -13,6 +13,19 @@
 
 - name: Add Kibana repository.
   apt_repository:
-    repo: 'deb https://artifacts.elastic.co/packages/{{ kibana_version }}/apt stable main'
+    repo: 'deb https://artifacts.elastic.co/packages/{{ kibana_release }}/apt stable main'
     state: present
     update_cache: true
+
+- name: Get installed elasticsearch version
+  command: dpkg-query --showformat='${Version}' --show {{ kibana_package }}
+  register: installed_kibana_version
+  failed_when: False
+  changed_when: False
+  check_mode: no
+
+- name: Unhold elasticsearch version
+  dpkg_selections:
+    name: "{{ kibana_package }}"
+    selection: "install"
+  when: not kibana_version_lock or (installed_kibana_version.stdout and installed_kibana_version.stdout != kibana_version)

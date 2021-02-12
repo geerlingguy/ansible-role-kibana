@@ -1,0 +1,6 @@
+- name: Hold elasticsearch version
+  become: yes
+  dpkg_selections:
+    name: "{{ kibana_package }}"
+    selection: "hold"
+  when: kibana_version_lock
