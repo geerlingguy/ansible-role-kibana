@@ -45,6 +45,23 @@ The URL (including port) over which Kibana will connect to Elasticsearch.
 
 If Elasticsearch is protected by HTTP basic authentication, set the username and password so Kibana can connect.
 
+    kibana_ssl_access: false
+
+Activate the SSL access to Kibana with HTTPS.
+
+    kibana_cert_path: /etc/kibana/certs/
+
+The path where you want to store your certs.
+
+    kibana_ssl_certificate: ""
+    kibana_ssl_key: ""
+
+The path to the keys on your computer.
+
+    kibana_ssl_verification_mode: full
+
+The level of ssl verification. Set to none if you are using self signed certificate
+
 ## Dependencies
 
 None.
