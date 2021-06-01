@@ -1,4 +1,5 @@
-- name: Hold elasticsearch version
+---
+- name: Hold kibana version
   become: yes
   dpkg_selections:
     name: "{{ kibana_package }}"

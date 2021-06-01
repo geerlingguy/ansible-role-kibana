@@ -17,14 +17,14 @@
     state: present
     update_cache: true
 
-- name: Get installed elasticsearch version
+- name: Get installed kibana version
   command: dpkg-query --showformat='${Version}' --show {{ kibana_package }}
   register: installed_kibana_version
   failed_when: False
   changed_when: False
   check_mode: no
 
-- name: Unhold elasticsearch version
+- name: Unhold kibana version
   dpkg_selections:
     name: "{{ kibana_package }}"
     selection: "install"
