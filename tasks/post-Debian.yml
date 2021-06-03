@@ -1,7 +1,6 @@
 ---
-- name: Hold kibana version
-  become: yes
+- name: Hold kibana version.
   dpkg_selections:
     name: "{{ kibana_package }}"
     selection: "hold"
-  when: kibana_version_lock
+  when: kibana_release_lock
