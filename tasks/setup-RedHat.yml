@@ -10,5 +10,31 @@
     dest: /etc/yum.repos.d/kibana.repo
     mode: 0644
 
-- name: Version separator
-  set_fact: version_separator="-"
+- name: Install yum-version-lock.
+  yum:
+    name: yum-plugin-versionlock
+    state: present
+    update_cache: yes
+  when: kibana_release_lock
+
+- name: Check if requested kibana release lock exists.
+  shell: 'yum versionlock list | grep {{ kibana_package }} | grep -c "{{ kibana_release }}"'
+  register: kibana_requested_release_locked
+  args:
+    warn: false
+  failed_when: False
+  changed_when: False
+  check_mode: False
+  when: kibana_release_lock
+
+- name: Lock kibana release.
+  shell: yum versionlock delete 0:{{ kibana_package }}* ; yum versionlock add {{ kibana_package }}-{{ kibana_release }}
+  args:
+    warn: false
+  when:
+    - kibana_release_lock
+    - kibana_requested_release_locked is defined
+    - kibana_requested_release_locked.stdout|int == 0
+
+- name: Release separator.
+  set_fact: release_separator="-"
