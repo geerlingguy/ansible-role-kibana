@@ -52,6 +52,7 @@ None.
 ## Example Playbook
 
     - hosts: kibana
+      become: true
       roles:
         - geerlingguy.kibana
 
