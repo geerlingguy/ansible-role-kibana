@@ -45,6 +45,10 @@ The URL (including port) over which Kibana will connect to Elasticsearch.
 
 If Elasticsearch is protected by HTTP basic authentication, set the username and password so Kibana can connect.
 
+    kibana_public_base_url: ""
+
+The publicly available URL that end-users access Kibana at.
+
 ## Dependencies
 
 None.
