@@ -45,6 +45,14 @@ The URL (including port) over which Kibana will connect to Elasticsearch.
 
 If Elasticsearch is protected by HTTP basic authentication, set the username and password so Kibana can connect.
 
+    kibana_extra_options: ''
+
+A placeholder for arbitrary configuration options not exposed by the role. This will be appended as-is to the end of the kibana.yml file, as long as your variable preserves formatting with a |. For example:
+
+    kibana_extra_options: |  # Dont forget the pipe!
+        some.option: true
+        another.option: false
+
 ## Dependencies
 
 None.
